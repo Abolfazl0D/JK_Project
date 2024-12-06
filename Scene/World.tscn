@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://cvoh673rpad2p"]
+
+[ext_resource type="PackedScene" uid="uid://b3n7due1tslmf" path="res://Scene/MainCharacter.tscn" id="1_30mfd"]
+[ext_resource type="Texture2D" uid="uid://6gxnxl285mvm" path="res://Assets/Sprite/tile_0032.png" id="1_univp"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_niic4"]
+size = Vector2(315.25, 45.5)
+
+[node name="World" type="Node2D"]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(-7, 214)
+shape = SubResource("RectangleShape2D_niic4")
+
+[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D"]
+position = Vector2(-7.00001, 214)
+scale = Vector2(39.5, 5.75)
+texture = ExtResource("1_univp")
+
+[node name="MainCharacter" parent="." instance=ExtResource("1_30mfd")]
+position = Vector2(57, 90)

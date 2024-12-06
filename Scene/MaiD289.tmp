@@ -1,0 +1,59 @@
+[gd_scene load_steps=7 format=3 uid="uid://b3n7due1tslmf"]
+
+[ext_resource type="Script" path="res://Script/MainCharacter.gd" id="1_ct8qy"]
+[ext_resource type="Texture2D" uid="uid://byb46i5ow737r" path="res://Assets/Sprite/tile_0108.png" id="2_7je3h"]
+[ext_resource type="Texture2D" uid="uid://cx8eura2dyptk" path="res://Assets/Sprite/tile_0105.png" id="3_n65af"]
+[ext_resource type="Texture2D" uid="uid://nya15xgnfko5" path="res://Assets/Sprite/tile_0107.png" id="4_0pli2"]
+[ext_resource type="Texture2D" uid="uid://f3c6sds1tokp" path="res://Assets/Sprite/tile_0106.png" id="5_7niqr"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_xryqx"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_7je3h")
+}],
+"loop": true,
+"name": &"death",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_n65af")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 7.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_0pli2")
+}],
+"loop": true,
+"name": &"jump",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_7niqr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_0pli2")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 7.0
+}]
+
+[node name="MainCharacter" type="CharacterBody2D"]
+script = ExtResource("1_ct8qy")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+drag_horizontal_enabled = true
+drag_vertical_enabled = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_xryqx")
+animation = &"idle"
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(-3, -3, 3, -3, 3, 3, -3, 3)
