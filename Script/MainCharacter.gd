@@ -11,7 +11,6 @@ var Shoot_Delay = false
 func _physics_process(delta):
 	
 	Gravity_process()
-	print(velocity)
 	
 	if Input.is_action_pressed("MoveLeft"):
 		velocity.x = -Speed
@@ -31,7 +30,7 @@ func _physics_process(delta):
 	
 	if !velocity.x == 0 and is_on_floor():
 		$AnimatedSprite2D.animation = "walk"
-	
+		
 	if velocity.x == 0 and is_on_floor():
 		$AnimatedSprite2D.animation = "idle"
 		
@@ -48,7 +47,7 @@ func Gravity_process():
 	if velocity.y > 0:
 		await get_tree().create_timer(0.1).timeout
 		Gravity += 1
-	if Gravity > 15:
-		Gravity = 15
+	if Gravity > 12:
+		Gravity = 12
 	if velocity.y > 170:
 		velocity.y = 170
