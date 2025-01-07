@@ -59,8 +59,9 @@ frame_progress = 1.0
 polygon = PackedVector2Array(-3, -3, 3, -3, 3, 4, -3, 4)
 
 [node name="Camera2D" type="Camera2D" parent="."]
-process_callback = 0
-position_smoothing_speed = 10.0
+limit_smoothed = true
+position_smoothing_enabled = true
+rotation_smoothing_enabled = true
 drag_horizontal_enabled = true
+drag_vertical_enabled = true
 drag_left_margin = 0.36
-drag_top_margin = 0.35
