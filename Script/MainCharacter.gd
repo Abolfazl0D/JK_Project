@@ -10,7 +10,7 @@ var Shoot_Delay = false
 
 func _physics_process(delta):
 	
-	print (velocity.y)
+	#print(velocity.y)
 	
 	Gravity_process()
 	
@@ -31,12 +31,12 @@ func _physics_process(delta):
 		Jump_permission = true
 	else: 
 		Jump_permission = false
-		
+	
 	if Input.is_action_just_pressed("Jump") and Jump_permission == true:
 		velocity.y = Jump
 	
-
-
+	if Input.is_action_just_released("Jump") and Jump_permission == false and velocity.y < 0:
+		velocity.y = 0
 	
 	if !is_on_floor():
 		$AnimatedSprite2D.animation = "jump"
