@@ -19,6 +19,7 @@ animations = [{
 polygon = PackedVector2Array(-4, -4, 4, -4, 4, 3, -4, 3)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -1)
 sprite_frames = SubResource("SpriteFrames_osdm7")
 autoplay = "default"
-frame_progress = 0.978023
+frame_progress = 0.120787
