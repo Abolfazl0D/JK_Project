@@ -6,7 +6,7 @@ var Gravity = 3
 var Jump_permission = true
 var Protoction = false
 var Shoot_Delay = false
-
+var falling = false
 
 func _physics_process(delta):
 	
@@ -17,6 +17,7 @@ func _physics_process(delta):
 	if is_on_floor():
 		velocity.y = 0
 		Jump_permission = true
+		falling = false
 
 	if Input.is_action_pressed("MoveLeft"):
 		velocity.x = -Speed
@@ -47,13 +48,12 @@ func _physics_process(delta):
 	if velocity.x > 0:
 		$AnimatedSprite2D.flip_h = false
 	
-	if velocity.y >= 0 and !is_on_floor_only():
+	if velocity.y >= 0 and !is_on_floor() and falling == false:
+		falling = true
 		Jump_Delay()
-		#print("Delay Jump_permission = false")
-	elif !is_on_floor():
-		#print("Jump_Permission = false")
+	elif !is_on_floor() and !falling:
+		print("Jump_Permission = false")
 		Jump_permission = false
-	
 
 
 	move_and_slide()
@@ -70,7 +70,9 @@ func Gravity_process():
 		velocity.y = 180
 
 func Jump_Delay():
-	if velocity.y >= 0 and !is_on_floor_only():
-		await get_tree().create_timer(1).timeout
-		if velocity.y >= 0 and !is_on_floor_only():
-			Jump_permission = false
+	await get_tree().create_timer(0.3).timeout
+	if !is_on_floor():
+		print("Delay Jump_permission = false")
+		Jump_permission = false
+
+
