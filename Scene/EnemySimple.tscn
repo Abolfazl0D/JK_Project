@@ -1,0 +1,50 @@
+[gd_scene load_steps=5 format=3 uid="uid://ck5jhmu5cteyy"]
+
+[ext_resource type="Script" path="res://Script/EnemySimple.gd" id="1_7b3i3"]
+[ext_resource type="Texture2D" uid="uid://480ncxsnmxmf" path="res://Assets/Sprite/tile_0109.png" id="2_1qh3l"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_osdm7"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_1qh3l")
+}],
+"loop": true,
+"name": &"default",
+"speed": 8.0
+}]
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_f1aeb"]
+vertices = PackedVector2Array(74, -6, -74, -6, -74, -10, 74, -10)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(84, -20, -84, -20, -84, 4, 84, 4)])
+source_geometry_group_name = &"navigation_polygon_source_group"
+
+[node name="EnemySimple" type="CharacterBody2D"]
+script = ExtResource("1_7b3i3")
+metadata/_edit_horizontal_guides_ = [-20.0]
+metadata/_edit_vertical_guides_ = [-84.0, 84.0]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(-4, -4, 4, -4, 4, 3, -4, 3)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -1)
+sprite_frames = SubResource("SpriteFrames_osdm7")
+autoplay = "default"
+frame_progress = 0.120787
+
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
+navigation_polygon = SubResource("NavigationPolygon_f1aeb")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+debug_enabled = true
+debug_path_custom_color = Color(0.890196, 0.00392157, 0.00392157, 1)
+
+[node name="HitBox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionPolygon2D" parent="HitBox"]
+position = Vector2(0, -1)
+polygon = PackedVector2Array(5, -4, 5, 4, -5, 4, -5, -4)
+
+[connection signal="body_entered" from="HitBox" to="." method="_on_hit_box_body_entered"]
