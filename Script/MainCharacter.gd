@@ -1,12 +1,16 @@
 extends CharacterBody2D
 
-var Speed = 80
+var Speed = 75
 var Jump = -180
 var Gravity = 3
 var Jump_permission = true
 var Protoction = false
 var Shoot_Delay = false
 var Falling = false
+@onready var HP = $"/root/GlobalVar".HP
+@onready var Bullet = $"/root/GlobalVar".Bullet
+@onready var Coin = $"/root/GlobalVar".Coin
+@onready var Water = $"/root/GlobalVar".Water
 
 func _physics_process(delta):
 	
@@ -70,8 +74,9 @@ func Gravity_process():
 		velocity.y = 180
 
 func Jump_Delay():
-	await get_tree().create_timer(0.12).timeout
+	await get_tree().create_timer(0.1).timeout
 	if !is_on_floor():
 		Jump_permission = false
 
-
+func Hurt():
+	set_modulate(Color(1,0,0,1))

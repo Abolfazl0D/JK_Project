@@ -15,4 +15,7 @@ func _physics_process(delta):
 
 func _on_hit_box_body_entered(body):
 	if body.name == "MainCharacter":
+		$"/root/GlobalVar".HP -= Damage
 		body.Hurt()
+	if body.name == "Bullet":
+		HP -= 1

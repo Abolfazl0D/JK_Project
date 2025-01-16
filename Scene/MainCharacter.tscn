@@ -46,7 +46,6 @@ animations = [{
 
 [node name="MainCharacter" type="CharacterBody2D"]
 collision_layer = 2
-collision_mask = 61
 script = ExtResource("1_ct8qy")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]

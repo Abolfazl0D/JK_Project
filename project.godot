@@ -14,6 +14,10 @@ config/name="JK_Project"
 config/features=PackedStringArray("4.2", "GL Compatibility")
 config/icon="res://icon.svg"
 
+[autoload]
+
+GlobalVar="*res://Script/GlobalVar.gd"
+
 [debug]
 
 canvas_items/debug_redraw_color=Color(1, 0.2, 0.2, 0.501961)
