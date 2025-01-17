@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://byukip6cl6kj1"]
+[gd_scene load_steps=36 format=3 uid="uid://byukip6cl6kj1"]
 
 [ext_resource type="Script" path="res://Script/HUD.gd" id="1_hyeiu"]
 [ext_resource type="Texture2D" uid="uid://dfvfm0t4pmqg4" path="res://Assets/Sprite/PurenessBar_0%.png" id="2_16qig"]
@@ -22,6 +22,17 @@
 [ext_resource type="Texture2D" uid="uid://cjqusedis57xu" path="res://Assets/Sprite/PurenessBar_90%.png" id="20_48pxq"]
 [ext_resource type="Texture2D" uid="uid://dwpoah2afrkv5" path="res://Assets/Sprite/PurenessBar_95%.png" id="21_nlb2n"]
 [ext_resource type="Texture2D" uid="uid://cie455r3jvjlk" path="res://Assets/Sprite/PurenessBar_100%.png" id="22_3xdm2"]
+[ext_resource type="Texture2D" uid="uid://b3wmemjc6o7kx" path="res://Assets/Sprite/Hearts_0%.png" id="23_r606g"]
+[ext_resource type="Texture2D" uid="uid://b05vtpa331wno" path="res://Assets/Sprite/Hearts_10%.png" id="24_ddnr0"]
+[ext_resource type="Texture2D" uid="uid://25egajhyiyi2" path="res://Assets/Sprite/Hearts_20%.png" id="25_3qak8"]
+[ext_resource type="Texture2D" uid="uid://b73jb2pi3rmqm" path="res://Assets/Sprite/Hearts_30%.png" id="26_8lgtu"]
+[ext_resource type="Texture2D" uid="uid://b1cw47p84hla2" path="res://Assets/Sprite/Hearts_40%.png" id="27_uyax7"]
+[ext_resource type="Texture2D" uid="uid://ddkwiwt8pkcxa" path="res://Assets/Sprite/Hearts_50%.png" id="28_c7p4o"]
+[ext_resource type="Texture2D" uid="uid://ddgdptp5upt0l" path="res://Assets/Sprite/Hearts_60%.png" id="29_5frh4"]
+[ext_resource type="Texture2D" uid="uid://yvjci6ry5npa" path="res://Assets/Sprite/Hearts_70%.png" id="30_0cgay"]
+[ext_resource type="Texture2D" uid="uid://eb2g6487s87e" path="res://Assets/Sprite/Hearts_80%.png" id="31_r7cau"]
+[ext_resource type="Texture2D" uid="uid://dti6pjlcohx3n" path="res://Assets/Sprite/Hearts_90%.png" id="32_jhf6i"]
+[ext_resource type="Texture2D" uid="uid://cto5ohu8dvle8" path="res://Assets/Sprite/Hearts_100%.png" id="33_yskl6"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_51rtl"]
 animations = [{
@@ -94,10 +105,61 @@ animations = [{
 "speed": 7.0
 }]
 
+[sub_resource type="SpriteFrames" id="SpriteFrames_kquu2"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("23_r606g")
+}, {
+"duration": 1.0,
+"texture": ExtResource("24_ddnr0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("25_3qak8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("26_8lgtu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("27_uyax7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("28_c7p4o")
+}, {
+"duration": 1.0,
+"texture": ExtResource("29_5frh4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("30_0cgay")
+}, {
+"duration": 1.0,
+"texture": ExtResource("31_r7cau")
+}, {
+"duration": 1.0,
+"texture": ExtResource("32_jhf6i")
+}, {
+"duration": 1.0,
+"texture": ExtResource("33_yskl6")
+}],
+"loop": true,
+"name": &"Heart",
+"speed": 2.0
+}]
+
 [node name="HUD" type="Node2D"]
 script = ExtResource("1_hyeiu")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 0
+
+[node name="Purenessbar" type="AnimatedSprite2D" parent="CanvasLayer"]
+position = Vector2(34, 20)
 sprite_frames = SubResource("SpriteFrames_51rtl")
 animation = &"PurenessBar"
 frame_progress = 0.80433
+
+[node name="Heart" type="AnimatedSprite2D" parent="CanvasLayer"]
+position = Vector2(35, 8)
+sprite_frames = SubResource("SpriteFrames_kquu2")
+animation = &"Heart"
+frame = 10

@@ -7,6 +7,6 @@ var Damage = 1
 
 var Coin = 0
 
-var Pureness = 0
+var Pureness = 100
 
 var Bullet = 0

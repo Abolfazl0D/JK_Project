@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d2oxub5t62gmd"
-path="res://.godot/imported/Pureness.png-e06aba4d98616caec8a9f15ea16f49d4.ctex"
+uid="uid://b05vtpa331wno"
+path="res://.godot/imported/Hearts_10%.png-8a6f501294eaef649da578747d6f0ae7.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprite/Pureness.png"
-dest_files=["res://.godot/imported/Pureness.png-e06aba4d98616caec8a9f15ea16f49d4.ctex"]
+source_file="res://Assets/Sprite/Hearts_10%.png"
+dest_files=["res://.godot/imported/Hearts_10%.png-8a6f501294eaef649da578747d6f0ae7.ctex"]
 
 [params]
 

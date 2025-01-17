@@ -1,10 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://b3n7due1tslmf"]
+[gd_scene load_steps=8 format=3 uid="uid://b3n7due1tslmf"]
 
 [ext_resource type="Script" path="res://Script/MainCharacter.gd" id="1_ct8qy"]
 [ext_resource type="Texture2D" uid="uid://byb46i5ow737r" path="res://Assets/Sprite/tile_0108.png" id="2_7je3h"]
 [ext_resource type="Texture2D" uid="uid://cx8eura2dyptk" path="res://Assets/Sprite/tile_0105.png" id="3_n65af"]
 [ext_resource type="Texture2D" uid="uid://nya15xgnfko5" path="res://Assets/Sprite/tile_0107.png" id="4_0pli2"]
 [ext_resource type="Texture2D" uid="uid://f3c6sds1tokp" path="res://Assets/Sprite/tile_0106.png" id="5_7niqr"]
+[ext_resource type="PackedScene" uid="uid://byukip6cl6kj1" path="res://Scene/HUD.tscn" id="6_kappv"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_xryqx"]
 animations = [{
@@ -64,3 +65,5 @@ rotation_smoothing_enabled = true
 drag_horizontal_enabled = true
 drag_vertical_enabled = true
 drag_left_margin = 0.36
+
+[node name="HUD" parent="." instance=ExtResource("6_kappv")]

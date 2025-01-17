@@ -10,7 +10,7 @@ var Falling = false
 @onready var HP = $"/root/GlobalVar".HP
 @onready var Bullet = $"/root/GlobalVar".Bullet
 @onready var Coin = $"/root/GlobalVar".Coin
-@onready var Water = $"/root/GlobalVar".Water
+@onready var Pureness = $"/root/GlobalVar".Pureness
 
 func _physics_process(delta):
 	
