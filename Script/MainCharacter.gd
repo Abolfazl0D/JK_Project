@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 var Speed = 75
-var Jump = -180
+var Jump = -170
 var Gravity = 3
 var Jump_permission = true
 var Protoction = false
@@ -68,10 +68,10 @@ func Gravity_process():
 	if velocity.y > 0 :
 		await get_tree().create_timer(0.1).timeout
 		Gravity += 1
-	if Gravity > 11: 
-		Gravity = 11
-	if velocity.y > 180:
-		velocity.y = 180
+	if Gravity > 10: 
+		Gravity = 10
+	if velocity.y > 175:
+		velocity.y = 175
 
 func Jump_Delay():
 	await get_tree().create_timer(0.1).timeout
