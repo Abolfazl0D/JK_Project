@@ -11,9 +11,8 @@ layer_0/tile_data = PackedInt32Array(1376279, 196608, 0, 1441815, 196608, 1, 150
 
 [node name="MainCharacter" parent="." instance=ExtResource("1_30mfd")]
 z_index = 1
-position = Vector2(256, 176)
+position = Vector2(696, 231)
 
 [node name="EnemySimple" parent="." node_paths=PackedStringArray("Player") instance=ExtResource("3_7h7dp")]
-visible = false
 position = Vector2(896, 237)
 Player = NodePath("../MainCharacter")

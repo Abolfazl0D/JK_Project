@@ -2,9 +2,15 @@ extends Node2D
 
 @onready var Pureness = get_node("/root/GlobalVar").Pureness
 @onready var PurenessBar = $CanvasLayer/Purenessbar
+@onready var HP = get_node("/root/GlobalVar").HP
+@onready var Heart = $CanvasLayer/Heart
+
 
 func _process(delta):
+	HP = get_node("/root/GlobalVar").HP
+	Pureness = get_node("/root/GlobalVar").Pureness
 	PurenessBarRefresh()
+	HPBarRefresh()
 
 func PurenessBarRefresh():
 	if 5 > Pureness or Pureness == 0:
@@ -57,4 +63,32 @@ func PurenessBarRefresh():
 		PurenessBar.frame = 0
 
 func HPBarRefresh():
-	pass
+	
+	if HP == 0:
+		Heart.frame = 0
+	elif HP < 0:
+		get_node("/root/GlobalVar").HP = 0
+		Heart.frame = 0
+	elif HP == 1:
+		Heart.frame = 1
+	elif HP == 2:
+		Heart.frame = 2
+	elif HP == 3:
+		Heart.frame = 3
+	elif HP == 4:
+		Heart.frame = 4
+	elif HP == 5:
+		Heart.frame = 5
+	elif HP == 6:
+		Heart.frame = 6
+	elif HP == 7:
+		Heart.frame = 7
+	elif HP == 8:
+		Heart.frame = 8
+	elif HP == 9:
+		Heart.frame = 9
+	elif HP == 10:
+		Heart.frame = 10
+	elif HP > 10:
+		get_node("/root/GlobalVar").HP = 10
+		Heart.frame = 10

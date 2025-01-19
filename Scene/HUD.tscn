@@ -143,7 +143,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"Heart",
-"speed": 5.0
+"speed": 7.0
 }]
 
 [node name="HUD" type="Node2D"]
@@ -156,12 +156,9 @@ layer = 0
 position = Vector2(34, 20)
 sprite_frames = SubResource("SpriteFrames_51rtl")
 animation = &"PurenessBar"
-autoplay = "PurenessBar"
-frame_progress = 0.345488
+frame_progress = 0.39268
 
 [node name="Heart" type="AnimatedSprite2D" parent="CanvasLayer"]
 position = Vector2(36, 8)
 sprite_frames = SubResource("SpriteFrames_kquu2")
 animation = &"Heart"
-autoplay = "Heart"
-frame_progress = 0.558341

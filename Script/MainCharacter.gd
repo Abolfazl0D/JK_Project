@@ -35,8 +35,8 @@ func _physics_process(delta):
 	if Input.is_action_just_pressed("Jump") and Jump_permission:
 		velocity.y = Jump
 	
-	if Input.is_action_just_released("Jump") and !is_on_floor() and velocity.y < -60:
-		velocity.y = -20
+	if Input.is_action_just_released("Jump") and !is_on_floor() and velocity.y < -30:
+		velocity.y = -10
 	
 	if !is_on_floor():
 		$AnimatedSprite2D.animation = "jump"
@@ -79,4 +79,12 @@ func Jump_Delay():
 		Jump_permission = false
 
 func Hurt():
-	set_modulate(Color(1,0,0,1))
+	Protoction = true
+	velocity.y = -135
+	move_and_slide()
+	set_modulate(Color(1.2,0,0,1))
+	await get_tree().create_timer(0.2).timeout
+	Protoction = false
+	set_modulate(Color(1,1,1,1))
+	
+	
