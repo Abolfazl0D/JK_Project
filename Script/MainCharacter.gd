@@ -80,10 +80,12 @@ func Jump_Delay():
 
 func Hurt():
 	Protoction = true
-	velocity.y = -135
+	velocity.y = -130
 	move_and_slide()
 	set_modulate(Color(1.2,0,0,1))
-	await get_tree().create_timer(0.2).timeout
+	get_node("/root/World").process_mode = Node.PROCESS_MODE_WHEN_PAUSED
+	await get_tree().create_timer(0.15).timeout
+	get_node("/root/World").process_mode = Node.PROCESS_MODE_INHERIT
 	Protoction = false
 	set_modulate(Color(1,1,1,1))
 	

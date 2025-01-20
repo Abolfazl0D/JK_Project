@@ -1,27 +1,44 @@
-[gd_scene load_steps=6 format=3 uid="uid://ck5jhmu5cteyy"]
+[gd_scene load_steps=9 format=3 uid="uid://ck5jhmu5cteyy"]
 
 [ext_resource type="Script" path="res://Script/EnemySimple.gd" id="1_7b3i3"]
 [ext_resource type="Texture2D" uid="uid://480ncxsnmxmf" path="res://Assets/Sprite/tile_0109.png" id="2_1qh3l"]
+[ext_resource type="Texture2D" uid="uid://l4plvy44qm8k" path="res://Assets/Sprite/tile_0153.png" id="2_8y0p3"]
+[ext_resource type="Texture2D" uid="uid://baiy7ulnvqkx7" path="res://Assets/Sprite/tile_0151.png" id="3_2e87b"]
+[ext_resource type="Texture2D" uid="uid://dkao1jiw8h34j" path="res://Assets/Sprite/tile_0152.png" id="4_xlui7"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_osdm7"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("2_1qh3l")
+"texture": ExtResource("2_8y0p3")
 }],
 "loop": true,
-"name": &"default",
+"name": &"Idle",
+"speed": 2.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_2e87b")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_1qh3l")
+}, {
+"duration": 0.5,
+"texture": ExtResource("4_xlui7")
+}],
+"loop": true,
+"name": &"Walking",
 "speed": 8.0
 }]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_f1aeb"]
-vertices = PackedVector2Array(186, 17, -186, 17, -186, -17, 186, -17)
+vertices = PackedVector2Array(165, 17, -165, 17, -165, -19, 165, -19)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
-outlines = Array[PackedVector2Array]([PackedVector2Array(-196, -27, 196, -27, 196, 27, -196, 27)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-175, -29, 175, -29, 175, 27, -175, 27)])
 source_geometry_group_name = &"navigation_polygon_source_group"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_75a0s"]
-size = Vector2(392, 54)
+size = Vector2(330, 49)
 
 [node name="EnemySimple" type="CharacterBody2D"]
 z_index = -1
@@ -29,32 +46,43 @@ collision_layer = 4
 script = ExtResource("1_7b3i3")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
-polygon = PackedVector2Array(-4, -4, 4, -4, 4, 3, -4, 3)
+polygon = PackedVector2Array(-4, -4, 4, -4, 4, 4, -4, 4)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 z_index = 1
-position = Vector2(0, -1)
 sprite_frames = SubResource("SpriteFrames_osdm7")
-autoplay = "default"
-frame_progress = 0.120787
+animation = &"Idle"
+autoplay = "Idle"
+frame_progress = 0.500306
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
 navigation_polygon = SubResource("NavigationPolygon_f1aeb")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
-debug_enabled = true
+debug_use_custom = true
 debug_path_custom_color = Color(0.890196, 0.00392157, 0.00392157, 1)
+debug_path_custom_point_size = 1.25
 
 [node name="HitBox" type="Area2D" parent="."]
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionPolygon2D" parent="HitBox"]
 position = Vector2(0, -1)
-polygon = PackedVector2Array(5, -4, 5, 4, -5, 4, -5, -4)
+polygon = PackedVector2Array(4, -3, 4, 4, -4, 4, -4, -3)
 
-[node name="PlayerDected" type="Area2D" parent="."]
+[node name="PlayerObserver" type="Area2D" parent="."]
+collision_mask = 2
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDected"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerObserver"]
+position = Vector2(0, -7.5)
 shape = SubResource("RectangleShape2D_75a0s")
 
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.1
+autostart = true
+
+[connection signal="target_reached" from="NavigationAgent2D" to="." method="_on_navigation_agent_2d_target_reached"]
 [connection signal="body_entered" from="HitBox" to="." method="_on_hit_box_body_entered"]
+[connection signal="body_entered" from="PlayerObserver" to="." method="_on_player_observer_body_entered"]
+[connection signal="body_exited" from="PlayerObserver" to="." method="_on_player_observer_body_exited"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
