@@ -7,17 +7,36 @@ var Damage = 2
 var PlayerObserved = false
 var Speed = 60
 var Gravity = 3
+var FloorcheckRight = true
+var FloorcheckLeft = true
 
 func _physics_process(delta):
 	Gravity_process()
+	
+	if !velocity.x == 0:
+		$AnimatedSprite2D.animation = "Walking"
+	if velocity.x == 0:
+		$AnimatedSprite2D.animation = "Idle"
+	
 	if PlayerObserved:
 		var dir = to_local($NavigationAgent2D.get_next_path_position()).normalized()
-		velocity.x = Speed * dir.x
-
+		#print(dir)
+		if FloorcheckRight and FloorcheckLeft:
+			velocity.x = Speed * dir.x
+		elif !FloorcheckLeft:
+			if dir.x > 0.1:
+				FloorcheckLeft = true
+			else:
+				velocity.x = 0
+		elif !FloorcheckRight:
+			if dir.x < -0.1:
+				FloorcheckRight = true
+			else:
+				velocity.x = 0
+	
 	if !PlayerObserved:
 		velocity.x = 0
 
-	
 	move_and_slide()
 
 func _on_hit_box_body_entered(body):
@@ -28,14 +47,11 @@ func _on_hit_box_body_entered(body):
 	if body.name == "Bullet":
 		HP -= 1
 
-
 func _on_player_observer_body_entered(body):
-	$AnimatedSprite2D.animation = "Walking"
 	PlayerObserved = true
 
 
 func _on_player_observer_body_exited(body):
-	$AnimatedSprite2D.animation = "Idle"
 	PlayerObserved = false
 
 
@@ -53,5 +69,23 @@ func Gravity_process():
 		velocity.y = 175
 
 
-func _on_navigation_agent_2d_target_reached():
-	pass
+
+
+func _on_floorcheck_left_body_exited(body):
+	if PlayerObserved:
+		FloorcheckLeft = false
+	else: 
+		Speed = -Speed
+func _on_floorcheck_right_body_exited(body):
+	if PlayerObserved:
+		FloorcheckRight = false
+	else: 
+		Speed = -Speed
+
+
+func _on_floorcheck_left_body_entered(body):
+	FloorcheckLeft = true
+
+func _on_floorcheck_right_body_entered(body):
+	FloorcheckRight = true
+

@@ -56,6 +56,7 @@ autoplay = "walk"
 frame_progress = 1.0
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+visible = false
 polygon = PackedVector2Array(-3, -3, 3, -3, 3, 4, -3, 4)
 
 [node name="Camera2D" type="Camera2D" parent="."]
@@ -67,3 +68,23 @@ drag_vertical_enabled = true
 drag_left_margin = 0.36
 
 [node name="HUD" parent="." instance=ExtResource("6_kappv")]
+
+[node name="HealParticles" type="CPUParticles2D" parent="."]
+emitting = false
+amount = 50
+lifetime = 0.2
+one_shot = true
+speed_scale = 0.5
+explosiveness = 0.76
+randomness = 1.0
+lifetime_randomness = 1.0
+emission_shape = 2
+emission_sphere_radius = 0.01
+particle_flag_align_y = true
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 30.0
+initial_velocity_max = 30.0
+scale_amount_min = 1.4
+scale_amount_max = 1.6
+color = Color(0.0588235, 0.509804, 1, 1)

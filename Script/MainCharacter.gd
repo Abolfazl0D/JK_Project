@@ -13,10 +13,9 @@ var Falling = false
 @onready var Pureness = $"/root/GlobalVar".Pureness
 
 func _physics_process(delta):
-	
-	#print(velocity.y)
-	
 	Gravity_process()
+	Player_Abilities()
+	
 	
 	if is_on_floor():
 		velocity.y = 0
@@ -36,7 +35,7 @@ func _physics_process(delta):
 		velocity.y = Jump
 	
 	if Input.is_action_just_released("Jump") and !is_on_floor() and velocity.y < -30:
-		velocity.y = -10
+		velocity.y = -15
 	
 	if !is_on_floor():
 		$AnimatedSprite2D.animation = "jump"
@@ -61,7 +60,6 @@ func _physics_process(delta):
 
 	move_and_slide()
 
-
 func Gravity_process():
 	velocity.y += Gravity
 	
@@ -73,10 +71,23 @@ func Gravity_process():
 	if velocity.y > 175:
 		velocity.y = 175
 
-func Jump_Delay():
-	await get_tree().create_timer(0.1).timeout
-	if !is_on_floor():
-		Jump_permission = false
+func Player_Abilities():
+	HP = $"/root/GlobalVar".HP
+	Bullet = $"/root/GlobalVar".Bullet
+	Coin = $"/root/GlobalVar".Coin
+	Pureness = $"/root/GlobalVar".Pureness
+	
+	if Input.is_action_pressed("Heal") and HP < 10 and Pureness >= 35:
+		$HealParticles.emitting = true
+		Pureness -= 1
+		HP += 2
+		$"/root/GlobalVar".HP = HP
+
+
+	$"/root/GlobalVar".Bullet = Bullet
+	$"/root/GlobalVar".Coin = Coin
+	$"/root/GlobalVar".Pureness = Pureness
+
 
 func Hurt():
 	Protoction = true
@@ -88,5 +99,9 @@ func Hurt():
 	get_node("/root/World").process_mode = Node.PROCESS_MODE_INHERIT
 	Protoction = false
 	set_modulate(Color(1,1,1,1))
-	
-	
+
+
+func Jump_Delay():
+	await get_tree().create_timer(0.1).timeout
+	if !is_on_floor():
+		Jump_permission = false
