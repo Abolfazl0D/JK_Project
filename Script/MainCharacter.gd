@@ -40,10 +40,10 @@ func _physics_process(delta):
 	if !is_on_floor():
 		$AnimatedSprite2D.animation = "jump"
 	
-	if !velocity.x == 0 and is_on_floor():
+	elif !velocity.x == 0 and is_on_floor():
 		$AnimatedSprite2D.animation = "walk"
 		
-	if velocity.x == 0 and is_on_floor():
+	elif velocity.x == 0 and is_on_floor():
 		$AnimatedSprite2D.animation = "idle"
 		
 	if velocity.x < 0:
@@ -77,12 +77,13 @@ func Player_Abilities():
 	Coin = $"/root/GlobalVar".Coin
 	Pureness = $"/root/GlobalVar".Pureness
 	
-	if Input.is_action_pressed("Heal") and HP < 10 and Pureness >= 35:
+	if Input.is_action_just_pressed("Heal") and HP < 10 and Pureness >= 35:
 		$HealParticles.emitting = true
-		Pureness -= 1
+		Pureness -= 35
 		HP += 2
 		$"/root/GlobalVar".HP = HP
-
+	
+	
 
 	$"/root/GlobalVar".Bullet = Bullet
 	$"/root/GlobalVar".Coin = Coin
