@@ -7,6 +7,7 @@ var Jump_permission = true
 var Protoction = false
 var Shoot_Delay = false
 var Falling = false
+var Bullet_scene = preload("res://Scene/Bullet.tscn")
 @onready var HP = $"/root/GlobalVar".HP
 @onready var Bullet = $"/root/GlobalVar".Bullet
 @onready var Coin = $"/root/GlobalVar".Coin
@@ -83,12 +84,30 @@ func Player_Abilities():
 		HP += 2
 		$"/root/GlobalVar".HP = HP
 	
-	
+	if Input.is_action_just_pressed("Shoot"):
+		if $AnimatedSprite2D.flip_h == true:
+			$AnimationPlayer.current_animation = "ShootCam"
+			var Bullet_object = Bullet_scene.instantiate()
+			get_parent().add_child(Bullet_object)
+			Bullet_object.global_position = $ShootSpotRight.global_position
+			Bullet_object.Speed = -200
+			Bullet -= 1
+			print(Bullet)
+			$"/root/GlobalVar".Bullet = Bullet
+		else:
+			$AnimationPlayer.current_animation = "ShootCam"
+			var Bullet_object = Bullet_scene.instantiate()
+			get_parent().add_child(Bullet_object)
+			Bullet_object.global_position = $ShootSpotRight.global_position
+			Bullet_object.Speed = 200
+			Bullet -= 1
+			print(Bullet)
+			$"/root/GlobalVar".Bullet = Bullet
+		
 
-	$"/root/GlobalVar".Bullet = Bullet
+	
 	$"/root/GlobalVar".Coin = Coin
 	$"/root/GlobalVar".Pureness = Pureness
-
 
 func Hurt():
 	Protoction = true
@@ -100,7 +119,6 @@ func Hurt():
 	get_node("/root/World").process_mode = Node.PROCESS_MODE_INHERIT
 	Protoction = false
 	set_modulate(Color(1,1,1,1))
-
 
 func Jump_Delay():
 	await get_tree().create_timer(0.1).timeout

@@ -1,0 +1,23 @@
+[gd_scene load_steps=3 format=3 uid="uid://cx3pbn2iix47i"]
+
+[ext_resource type="Script" path="res://Script/Bullet.gd" id="1_3luyh"]
+[ext_resource type="Texture2D" uid="uid://bmwm0akwtufxa" path="res://Assets/Sprite/tile_0154.png" id="1_nat1q"]
+
+[node name="RigidBody2D" type="RigidBody2D"]
+collision_layer = 64
+collision_mask = 60
+gravity_scale = 0.0
+script = ExtResource("1_3luyh")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_nat1q")
+
+[node name="CollisionShape2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(-1, -2, 1, -2, 1, -1, 2, -1, 2, 1, 1, 1, 1, 2, -1, 2, -1, 1, -2, 1, -2, -1, -1, -1)
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 64
+collision_mask = 60
+
+[node name="CollisionShape2D" type="CollisionPolygon2D" parent="Area2D"]
+polygon = PackedVector2Array(-1, -2, 1, -2, 1, -1, 2, -1, 2, 1, 1, 1, 1, 2, -1, 2, -1, 1, -2, 1, -2, -1, -1, -1)
