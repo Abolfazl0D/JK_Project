@@ -2,13 +2,17 @@ extends RigidBody2D
 
 var Speed = 180
 var Gravity = 2
+var Strike = false
+
 
 
 
 func _physics_process(delta):
-	Gravity_process()
-	linear_velocity.x = Speed
-	
+	if !Strike:
+		Gravity_process()
+		linear_velocity.x = Speed
+	else: 
+		linear_velocity = Vector2(0,0)
 	
 
 
@@ -24,4 +28,8 @@ func Gravity_process():
 
 func _on_area_2d_body_entered(body):
 	if body.name == "TileMap":
+		Strike = true
+		print(Strike)
+		$AnimatedSprite2D.animation = "Strike"
+		await get_tree().create_timer(0.05).timeout
 		queue_free()
