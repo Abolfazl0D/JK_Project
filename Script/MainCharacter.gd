@@ -7,6 +7,7 @@ var Jump_permission = true
 var Protoction = false
 var Shoot_Delay = false
 var Falling = false
+var Shooting = false
 var Bullet_scene = preload("res://Scene/Bullet.tscn")
 @onready var HP = $"/root/GlobalVar".HP
 @onready var Bullet = $"/root/GlobalVar".Bullet
@@ -38,14 +39,18 @@ func _physics_process(delta):
 	if Input.is_action_just_released("Jump") and !is_on_floor() and velocity.y < -30:
 		velocity.y = -15
 	
-	if !is_on_floor():
-		$AnimatedSprite2D.animation = "jump"
+		
+	if Shooting:
+		$AnimatedSprite2D.animation = "Shooting"
+	
+	elif !is_on_floor():
+		$AnimatedSprite2D.animation = "Jump"
 	
 	elif !velocity.x == 0 and is_on_floor():
-		$AnimatedSprite2D.animation = "walk"
+		$AnimatedSprite2D.animation = "Walk"
 		
 	elif velocity.x == 0 and is_on_floor():
-		$AnimatedSprite2D.animation = "idle"
+		$AnimatedSprite2D.animation = "Idle"
 		
 	if velocity.x < 0:
 		$AnimatedSprite2D.flip_h = true
@@ -84,7 +89,9 @@ func Player_Abilities():
 		HP += 2
 		$"/root/GlobalVar".HP = HP
 	
-	if Input.is_action_just_pressed("Shoot"):
+	if Input.is_action_just_pressed("Shoot") and !Shooting:
+		Shooting = true
+		$AnimatedSprite2D.animation = "Shooting"
 		if $AnimatedSprite2D.flip_h == true:
 			$AnimationPlayer.current_animation = "ShootCam"
 			var Bullet_object = Bullet_scene.instantiate()
@@ -103,7 +110,8 @@ func Player_Abilities():
 			Bullet -= 1
 			print(Bullet)
 			$"/root/GlobalVar".Bullet = Bullet
-		
+		await get_tree().create_timer(0.15).timeout
+		Shooting = false
 
 	
 	$"/root/GlobalVar".Coin = Coin

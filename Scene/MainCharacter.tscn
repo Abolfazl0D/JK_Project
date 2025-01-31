@@ -1,10 +1,11 @@
-[gd_scene load_steps=11 format=3 uid="uid://b3n7due1tslmf"]
+[gd_scene load_steps=12 format=3 uid="uid://b3n7due1tslmf"]
 
 [ext_resource type="Script" path="res://Script/MainCharacter.gd" id="1_ct8qy"]
 [ext_resource type="Texture2D" uid="uid://byb46i5ow737r" path="res://Assets/Sprite/tile_0108.png" id="2_7je3h"]
 [ext_resource type="Texture2D" uid="uid://cx8eura2dyptk" path="res://Assets/Sprite/tile_0105.png" id="3_n65af"]
 [ext_resource type="Texture2D" uid="uid://nya15xgnfko5" path="res://Assets/Sprite/tile_0107.png" id="4_0pli2"]
 [ext_resource type="Texture2D" uid="uid://f3c6sds1tokp" path="res://Assets/Sprite/tile_0106.png" id="5_7niqr"]
+[ext_resource type="Texture2D" uid="uid://c2fglaaqo0fu7" path="res://Assets/Sprite/tile_0150.png" id="5_h1kux"]
 [ext_resource type="PackedScene" uid="uid://byukip6cl6kj1" path="res://Scene/HUD.tscn" id="6_kappv"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_xryqx"]
@@ -14,7 +15,7 @@ animations = [{
 "texture": ExtResource("2_7je3h")
 }],
 "loop": true,
-"name": &"death",
+"name": &"Death",
 "speed": 5.0
 }, {
 "frames": [{
@@ -22,7 +23,7 @@ animations = [{
 "texture": ExtResource("3_n65af")
 }],
 "loop": true,
-"name": &"idle",
+"name": &"Idle",
 "speed": 7.0
 }, {
 "frames": [{
@@ -30,7 +31,15 @@ animations = [{
 "texture": ExtResource("4_0pli2")
 }],
 "loop": true,
-"name": &"jump",
+"name": &"Jump",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_h1kux")
+}],
+"loop": true,
+"name": &"Shooting",
 "speed": 5.0
 }, {
 "frames": [{
@@ -41,7 +50,7 @@ animations = [{
 "texture": ExtResource("5_7niqr")
 }],
 "loop": true,
-"name": &"walk",
+"name": &"Walk",
 "speed": 8.0
 }]
 
@@ -90,9 +99,8 @@ script = ExtResource("1_ct8qy")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_xryqx")
-animation = &"walk"
-autoplay = "walk"
-frame_progress = 1.0
+animation = &"Shooting"
+autoplay = "Walk"
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 visible = false
@@ -134,5 +142,7 @@ libraries = {
 }
 
 [node name="ShootSpotRight" type="Marker2D" parent="."]
+visible = false
 
 [node name="ShootSpotLeft" type="Marker2D" parent="."]
+visible = false

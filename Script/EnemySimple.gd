@@ -13,6 +13,9 @@ var FloorcheckLeft = true
 func _physics_process(delta):
 	Gravity_process()
 	
+	if HP <= 0:
+		queue_free()
+	
 	if !velocity.x == 0:
 		$AnimatedSprite2D.animation = "Walking"
 	if velocity.x == 0:
@@ -84,8 +87,12 @@ func _on_floorcheck_right_body_exited(body):
 
 
 func _on_floorcheck_left_body_entered(body):
-	FloorcheckLeft = true
+	if body.name == "TileMam":
+		FloorcheckLeft = true
 
 func _on_floorcheck_right_body_entered(body):
-	FloorcheckRight = true
+	if body.name == "TileMam":
+		FloorcheckRight = true
 
+func Hurt():
+	HP -= 1

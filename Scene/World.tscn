@@ -13,6 +13,18 @@ layer_0/tile_data = PackedInt32Array(1376279, 196608, 0, 1441815, 196608, 1, 150
 position = Vector2(277, 188)
 Player = NodePath("../MainCharacter")
 
+[node name="EnemySimple3" parent="." node_paths=PackedStringArray("Player") instance=ExtResource("3_7h7dp")]
+position = Vector2(1152, 230)
+Player = NodePath("../MainCharacter")
+
+[node name="EnemySimple4" parent="." node_paths=PackedStringArray("Player") instance=ExtResource("3_7h7dp")]
+position = Vector2(853, 228)
+Player = NodePath("../MainCharacter")
+
+[node name="EnemySimple2" parent="." node_paths=PackedStringArray("Player") instance=ExtResource("3_7h7dp")]
+position = Vector2(355, 140)
+Player = NodePath("../MainCharacter")
+
 [node name="MainCharacter" parent="." instance=ExtResource("1_30mfd")]
 z_index = 1
 position = Vector2(227, 197)
