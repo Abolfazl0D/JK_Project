@@ -1,9 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://cx3pbn2iix47i"]
+[gd_scene load_steps=5 format=3 uid="uid://cx3pbn2iix47i"]
 
 [ext_resource type="Script" path="res://Script/Bullet.gd" id="1_3luyh"]
 [ext_resource type="Texture2D" uid="uid://bmwm0akwtufxa" path="res://Assets/Sprite/tile_0154.png" id="1_nat1q"]
 [ext_resource type="Texture2D" uid="uid://bcvybk4wa4kby" path="res://Assets/Sprite/tile_0098.png" id="3_gi5o0"]
-[ext_resource type="Texture2D" uid="uid://bc18sinvgoa8e" path="res://Assets/Sprite/tile_0099.png" id="4_wc4j6"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_s7mp8"]
 animations = [{
@@ -16,9 +15,6 @@ animations = [{
 "speed": 5.0
 }, {
 "frames": [{
-"duration": 1.0,
-"texture": ExtResource("4_wc4j6")
-}, {
 "duration": 1.0,
 "texture": ExtResource("1_nat1q")
 }],
@@ -34,13 +30,13 @@ gravity_scale = 0.0
 script = ExtResource("1_3luyh")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-scale = Vector2(0.75, 0.75)
+scale = Vector2(0.7, 0.7)
 sprite_frames = SubResource("SpriteFrames_s7mp8")
-animation = &"Default"
+animation = &"Strike"
 autoplay = "Default"
 
 [node name="CollisionShape2D" type="CollisionPolygon2D" parent="."]
-scale = Vector2(0.75, 0.75)
+scale = Vector2(0.7, 0.7)
 polygon = PackedVector2Array(1, -1, 1, 1, -1, 1, -1, -1)
 
 [node name="Area2D" type="Area2D" parent="."]

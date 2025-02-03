@@ -75,23 +75,23 @@ func Gravity_process():
 
 
 func _on_floorcheck_left_body_exited(body):
-	if PlayerObserved:
+	if PlayerObserved and body.name == "TileMap":
 		FloorcheckLeft = false
 	else: 
 		Speed = -Speed
 func _on_floorcheck_right_body_exited(body):
-	if PlayerObserved:
+	if PlayerObserved and body.name == "TileMap":
 		FloorcheckRight = false
 	else: 
 		Speed = -Speed
 
 
 func _on_floorcheck_left_body_entered(body):
-	if body.name == "TileMam":
+	if body.name == "TileMap":
 		FloorcheckLeft = true
 
 func _on_floorcheck_right_body_entered(body):
-	if body.name == "TileMam":
+	if body.name == "TileMap":
 		FloorcheckRight = true
 
 func Hurt():

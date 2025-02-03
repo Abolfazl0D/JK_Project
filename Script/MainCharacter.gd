@@ -88,6 +88,7 @@ func Player_Abilities():
 		Pureness -= 35
 		HP += 2
 		$"/root/GlobalVar".HP = HP
+		$"/root/GlobalVar".Pureness = Pureness
 	
 	if Input.is_action_just_pressed("Shoot") and !Shooting:
 		Shooting = true
@@ -112,10 +113,11 @@ func Player_Abilities():
 			$"/root/GlobalVar".Bullet = Bullet
 		await get_tree().create_timer(0.15).timeout
 		Shooting = false
-
-	
+	if Input.is_action_just_pressed("ChargeShot"):
+		pass #left work here
+		
 	$"/root/GlobalVar".Coin = Coin
-	$"/root/GlobalVar".Pureness = Pureness
+	
 
 func Hurt():
 	Protoction = true
