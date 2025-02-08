@@ -1,0 +1,60 @@
+[gd_scene load_steps=4 format=3 uid="uid://cenvyyc5coxei"]
+
+[ext_resource type="Script" path="res://Script/ChargeShot.gd" id="1_267bq"]
+[ext_resource type="Texture2D" uid="uid://djsr7sxtl20o7" path="res://Assets/Sprite/tile_0155.png" id="1_w725u"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_emaj1"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_w725u")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="ChargeShot" type="RigidBody2D"]
+collision_layer = 0
+collision_mask = 61
+gravity_scale = 0.0
+script = ExtResource("1_267bq")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+scale = Vector2(0.9, 0.9)
+polygon = PackedVector2Array(-1, -2, 1, -2, 1, -1, 2, -1, 2, 1, 1, 1, 1, 2, -1, 2, -1, 1, -2, 1, -2, -1, -1, -1)
+
+[node name="Area2D" type="Area2D" parent="."]
+scale = Vector2(0.9, 0.9)
+collision_layer = 0
+collision_mask = 61
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
+scale = Vector2(0.9, 0.9)
+polygon = PackedVector2Array(-1, -2, 1, -2, 1, -1, 2, -1, 2, 1, 1, 1, 1, 2, -1, 2, -1, 1, -2, 1, -2, -1, -1, -1)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.9, 0.9)
+sprite_frames = SubResource("SpriteFrames_emaj1")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+amount = 2
+lifetime = 0.3
+gravity = Vector2(-1, 0)
+
+[node name="CPUParticles2D2" type="CPUParticles2D" parent="."]
+position = Vector2(-2.5, 0)
+lifetime = 0.7
+speed_scale = 5.0
+explosiveness = 0.5
+randomness = 0.33
+lifetime_randomness = 0.09
+emission_shape = 2
+emission_sphere_radius = 1.0
+gravity = Vector2(-1, 0)
+linear_accel_min = 2.0
+linear_accel_max = 5.0
+tangential_accel_max = 0.5
+color = Color(0.670588, 0.905882, 0.984314, 1)
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

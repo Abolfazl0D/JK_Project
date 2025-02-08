@@ -4,13 +4,17 @@ extends Node2D
 @onready var PurenessBar = $CanvasLayer/Purenessbar
 @onready var HP = get_node("/root/GlobalVar").HP
 @onready var Heart = $CanvasLayer/Heart
+@onready var Bullet = get_node("/root/GlobalVar").Bullet
+@onready var Bullet_count = $CanvasLayer/Label
 
 
 func _process(delta):
 	HP = get_node("/root/GlobalVar").HP
 	Pureness = get_node("/root/GlobalVar").Pureness
+	Bullet = get_node("/root/GlobalVar").Bullet
 	PurenessBarRefresh()
 	HPBarRefresh()
+	BulletRefresh()
 
 func PurenessBarRefresh():
 	if 5 > Pureness or Pureness == 0:
@@ -92,3 +96,7 @@ func HPBarRefresh():
 	elif HP > 10:
 		get_node("/root/GlobalVar").HP = 10
 		Heart.frame = 10
+
+func BulletRefresh():
+	var Bullet_str = str(Bullet)
+	$CanvasLayer/Label.text = Bullet_str

@@ -14,6 +14,9 @@ func _physics_process(delta):
 	Gravity_process()
 	
 	if HP <= 0:
+		$"/root/GlobalVar".Pureness += 5
+		$AnimatedSprite2D.animation = "Idle"
+		#work to do
 		queue_free()
 	
 	if !velocity.x == 0:
@@ -77,13 +80,10 @@ func Gravity_process():
 func _on_floorcheck_left_body_exited(body):
 	if PlayerObserved and body.name == "TileMap":
 		FloorcheckLeft = false
-	else: 
-		Speed = -Speed
+
 func _on_floorcheck_right_body_exited(body):
 	if PlayerObserved and body.name == "TileMap":
 		FloorcheckRight = false
-	else: 
-		Speed = -Speed
 
 
 func _on_floorcheck_left_body_entered(body):
@@ -95,4 +95,10 @@ func _on_floorcheck_right_body_entered(body):
 		FloorcheckRight = true
 
 func Hurt():
+	#work to do
+	velocity.y = -60
+	move_and_slide()
+	set_modulate(Color(1.2,0,0,1))
+	await get_tree().create_timer(0.15).timeout
+	set_modulate(Color(1,1,1,1))
 	HP -= 1

@@ -9,10 +9,8 @@ var Shoot_Delay = false
 var Falling = false
 var Shooting = false
 var Bullet_scene = preload("res://Scene/Bullet.tscn")
-@onready var HP = $"/root/GlobalVar".HP
-@onready var Bullet = $"/root/GlobalVar".Bullet
-@onready var Coin = $"/root/GlobalVar".Coin
-@onready var Pureness = $"/root/GlobalVar".Pureness
+var Charge_bullet_scene = preload("res://Scene/ChargeShot.tscn")
+
 
 func _physics_process(delta):
 	Gravity_process()
@@ -78,19 +76,18 @@ func Gravity_process():
 		velocity.y = 175
 
 func Player_Abilities():
-	HP = $"/root/GlobalVar".HP
-	Bullet = $"/root/GlobalVar".Bullet
-	Coin = $"/root/GlobalVar".Coin
-	Pureness = $"/root/GlobalVar".Pureness
+	$"/root/GlobalVar".HP
+	$"/root/GlobalVar".Bullet
+	$"/root/GlobalVar".Coin
+	$"/root/GlobalVar".Pureness
+
 	
-	if Input.is_action_just_pressed("Heal") and HP < 10 and Pureness >= 35:
+	if Input.is_action_just_pressed("Heal") and $"/root/GlobalVar".HP < 10 and $"/root/GlobalVar".Pureness >= 35:
 		$HealParticles.emitting = true
-		Pureness -= 35
-		HP += 2
-		$"/root/GlobalVar".HP = HP
-		$"/root/GlobalVar".Pureness = Pureness
+		$"/root/GlobalVar".Pureness -= 35
+		$"/root/GlobalVar".HP += 2
 	
-	if Input.is_action_just_pressed("Shoot") and !Shooting:
+	if Input.is_action_just_pressed("Shoot") and $"/root/GlobalVar".Bullet >= 1 and !Shooting:
 		Shooting = true
 		$AnimatedSprite2D.animation = "Shooting"
 		if $AnimatedSprite2D.flip_h == true:
@@ -99,24 +96,43 @@ func Player_Abilities():
 			get_parent().add_child(Bullet_object)
 			Bullet_object.global_position = $ShootSpotRight.global_position
 			Bullet_object.Speed = -200
-			Bullet -= 1
-			print(Bullet)
-			$"/root/GlobalVar".Bullet = Bullet
+			$"/root/GlobalVar".Bullet -= 1
 		else:
 			$AnimationPlayer.current_animation = "ShootCam"
 			var Bullet_object = Bullet_scene.instantiate()
 			get_parent().add_child(Bullet_object)
 			Bullet_object.global_position = $ShootSpotRight.global_position
 			Bullet_object.Speed = 200
-			Bullet -= 1
-			print(Bullet)
-			$"/root/GlobalVar".Bullet = Bullet
+			$"/root/GlobalVar".Bullet -= 1
 		await get_tree().create_timer(0.15).timeout
 		Shooting = false
-	if Input.is_action_just_pressed("ChargeShot"):
-		pass #left work here
+	if Input.is_action_just_pressed("ChargeShot") and $"/root/GlobalVar".Pureness >= 25 and !Shooting:
+		if !$AnimatedSprite2D.flip_h:
+			velocity.x = -80
+			move_and_slide()
+		else:
+			velocity.x = 80
+			move_and_slide()
+		Shooting = true
+		$AnimatedSprite2D.animation = "Shooting"
+		if $AnimatedSprite2D.flip_h == true:
+			$AnimationPlayer.current_animation = "ShootCam"
+			var Charge_bullet_object = Charge_bullet_scene.instantiate()
+			get_parent().add_child(Charge_bullet_object)
+			Charge_bullet_object.global_position = $ShootSpotRight.global_position
+			Charge_bullet_object.Speed = -190
+			$"/root/GlobalVar".Pureness -= 28
+		else:
+			$AnimationPlayer.current_animation = "ShootCam"
+			var Charge_bullet_object = Charge_bullet_scene.instantiate()
+			get_parent().add_child(Charge_bullet_object)
+			Charge_bullet_object.global_position = $ShootSpotRight.global_position
+			Charge_bullet_object.Speed = 190
+			$"/root/GlobalVar".Pureness -= 28
+		await get_tree().create_timer(0.3).timeout
+		Shooting = false
 		
-	$"/root/GlobalVar".Coin = Coin
+	
 	
 
 func Hurt():

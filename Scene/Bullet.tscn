@@ -23,7 +23,7 @@ animations = [{
 "speed": 10.0
 }]
 
-[node name="RigidBody2D" type="RigidBody2D"]
+[node name="Bullet" type="RigidBody2D"]
 collision_layer = 0
 collision_mask = 61
 gravity_scale = 0.0
@@ -32,7 +32,7 @@ script = ExtResource("1_3luyh")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(0.7, 0.7)
 sprite_frames = SubResource("SpriteFrames_s7mp8")
-animation = &"Strike"
+animation = &"Default"
 autoplay = "Default"
 
 [node name="CollisionShape2D" type="CollisionPolygon2D" parent="."]
@@ -45,7 +45,6 @@ collision_layer = 64
 collision_mask = 61
 
 [node name="CollisionShape2D" type="CollisionPolygon2D" parent="Area2D"]
-visible = false
 polygon = PackedVector2Array(-1, -2, 1, -2, 1, -1, 2, -1, 2, 1, 1, 1, 1, 2, -1, 2, -1, 1, -2, 1, -2, -1, -1, -1)
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

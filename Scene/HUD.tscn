@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=3 uid="uid://byukip6cl6kj1"]
+[gd_scene load_steps=39 format=3 uid="uid://byukip6cl6kj1"]
 
 [ext_resource type="Script" path="res://Script/HUD.gd" id="1_hyeiu"]
 [ext_resource type="Texture2D" uid="uid://dfvfm0t4pmqg4" path="res://Assets/Sprite/PurenessBar_0%.png" id="2_16qig"]
@@ -33,6 +33,8 @@
 [ext_resource type="Texture2D" uid="uid://eb2g6487s87e" path="res://Assets/Sprite/Hearts_80%.png" id="31_r7cau"]
 [ext_resource type="Texture2D" uid="uid://dti6pjlcohx3n" path="res://Assets/Sprite/Hearts_90%.png" id="32_jhf6i"]
 [ext_resource type="Texture2D" uid="uid://cto5ohu8dvle8" path="res://Assets/Sprite/Hearts_100%.png" id="33_yskl6"]
+[ext_resource type="Texture2D" uid="uid://bcvybk4wa4kby" path="res://Assets/Sprite/tile_0098.png" id="34_hty2q"]
+[ext_resource type="FontFile" uid="uid://1k6yp06j52k6" path="res://Assets/Font/Arapix.otf" id="35_8uf2k"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_51rtl"]
 animations = [{
@@ -146,6 +148,12 @@ animations = [{
 "speed": 7.0
 }]
 
+[sub_resource type="LabelSettings" id="LabelSettings_46vu7"]
+font = ExtResource("35_8uf2k")
+font_size = 12
+outline_size = 1
+outline_color = Color(0, 0, 0, 1)
+
 [node name="HUD" type="Node2D"]
 script = ExtResource("1_hyeiu")
 
@@ -162,3 +170,17 @@ frame_progress = 0.39268
 position = Vector2(36, 8)
 sprite_frames = SubResource("SpriteFrames_kquu2")
 animation = &"Heart"
+
+[node name="Bullet" type="Sprite2D" parent="CanvasLayer"]
+position = Vector2(13, 224.5)
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("34_hty2q")
+
+[node name="Label" type="Label" parent="CanvasLayer"]
+offset_left = 21.0
+offset_top = 215.0
+offset_right = 29.0
+offset_bottom = 227.0
+scale = Vector2(1.5, 1.5)
+text = "47"
+label_settings = SubResource("LabelSettings_46vu7")

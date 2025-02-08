@@ -9,4 +9,4 @@ var Coin = 0
 
 var Pureness = 100
 
-var Bullet = 0
+var Bullet = 50
