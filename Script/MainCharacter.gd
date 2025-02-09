@@ -15,8 +15,8 @@ var Charge_bullet_scene = preload("res://Scene/ChargeShot.tscn")
 func _physics_process(delta):
 	Gravity_process()
 	Player_Abilities()
-	
-	
+
+
 	if is_on_floor():
 		velocity.y = 0
 		Jump_permission = true
@@ -131,9 +131,6 @@ func Player_Abilities():
 			$"/root/GlobalVar".Pureness -= 28
 		await get_tree().create_timer(0.3).timeout
 		Shooting = false
-		
-	
-	
 
 func Hurt():
 	Protoction = true
@@ -141,7 +138,7 @@ func Hurt():
 	move_and_slide()
 	set_modulate(Color(1.2,0,0,1))
 	get_node("/root/World").process_mode = Node.PROCESS_MODE_WHEN_PAUSED
-	await get_tree().create_timer(0.15).timeout
+	await get_tree().create_timer(0.1).timeout
 	get_node("/root/World").process_mode = Node.PROCESS_MODE_INHERIT
 	Protoction = false
 	set_modulate(Color(1,1,1,1))

@@ -18,7 +18,7 @@ position = Vector2(1152, 230)
 Player = NodePath("../MainCharacter")
 
 [node name="EnemySimple4" parent="." node_paths=PackedStringArray("Player") instance=ExtResource("3_7h7dp")]
-position = Vector2(853, 228)
+position = Vector2(445, 179)
 Player = NodePath("../MainCharacter")
 
 [node name="EnemySimple2" parent="." node_paths=PackedStringArray("Player") instance=ExtResource("3_7h7dp")]

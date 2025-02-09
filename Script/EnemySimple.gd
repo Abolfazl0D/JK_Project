@@ -1,6 +1,5 @@
 extends CharacterBody2D
 
-
 @export var Player = Node2D
 var HP = 3
 var Damage = 2
@@ -9,24 +8,27 @@ var Speed = 60
 var Gravity = 3
 var FloorcheckRight = true
 var FloorcheckLeft = true
+var Death_Check = false
 
 func _physics_process(delta):
-	Gravity_process()
+	if HP >= 0:
+		Gravity_process()
+	
 	
 	if HP <= 0:
-		$"/root/GlobalVar".Pureness += 5
-		$AnimatedSprite2D.animation = "Idle"
-		#work to do
-		queue_free()
-	
-	if !velocity.x == 0:
+		velocity.x = 0
+		velocity.y = 0
+		Death()
+		$AnimatedSprite2D.animation = "Death"
+
+	elif !velocity.x == 0:
 		$AnimatedSprite2D.animation = "Walking"
-	if velocity.x == 0:
+	elif velocity.x == 0:
 		$AnimatedSprite2D.animation = "Idle"
-	
-	if PlayerObserved:
+
+		
+	if PlayerObserved and HP > 0:
 		var dir = to_local($NavigationAgent2D.get_next_path_position()).normalized()
-		#print(dir)
 		if FloorcheckRight and FloorcheckLeft:
 			velocity.x = Speed * dir.x
 		elif !FloorcheckLeft:
@@ -40,7 +42,7 @@ func _physics_process(delta):
 			else:
 				velocity.x = 0
 	
-	if !PlayerObserved:
+	if !PlayerObserved and HP > 0:
 		velocity.x = 0
 
 	move_and_slide()
@@ -55,7 +57,6 @@ func _on_hit_box_body_entered(body):
 
 func _on_player_observer_body_entered(body):
 	PlayerObserved = true
-
 
 func _on_player_observer_body_exited(body):
 	PlayerObserved = false
@@ -75,8 +76,6 @@ func Gravity_process():
 		velocity.y = 175
 
 
-
-
 func _on_floorcheck_left_body_exited(body):
 	if PlayerObserved and body.name == "TileMap":
 		FloorcheckLeft = false
@@ -94,6 +93,7 @@ func _on_floorcheck_right_body_entered(body):
 	if body.name == "TileMap":
 		FloorcheckRight = true
 
+
 func Hurt():
 	#work to do
 	velocity.y = -60
@@ -102,3 +102,17 @@ func Hurt():
 	await get_tree().create_timer(0.15).timeout
 	set_modulate(Color(1,1,1,1))
 	HP -= 1
+
+func Death():
+	if !Death_Check:
+		Death_Check = true 
+		$"/root/GlobalVar".Pureness += 5
+		$AnimatedSprite2D.animation = "Death"
+		$CollisionPolygon2D.disabled = true
+		$HitBox/CollisionShape2D.disabled = true
+		$PlayerObserver/CollisionShape2D.disabled = true
+		$FloorcheckLeft/CollisionShape2D.disabled = true
+		$FloorcheckRight/CollisionShape2D.disabled = true
+		await get_tree().create_timer(10).timeout
+		queue_free()
+

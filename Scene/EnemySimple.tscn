@@ -1,13 +1,30 @@
-[gd_scene load_steps=11 format=3 uid="uid://ck5jhmu5cteyy"]
+[gd_scene load_steps=14 format=3 uid="uid://ck5jhmu5cteyy"]
 
 [ext_resource type="Script" path="res://Script/EnemySimple.gd" id="1_7b3i3"]
 [ext_resource type="Texture2D" uid="uid://480ncxsnmxmf" path="res://Assets/Sprite/tile_0109.png" id="2_1qh3l"]
+[ext_resource type="Texture2D" uid="uid://bc18sinvgoa8e" path="res://Assets/Sprite/tile_0099.png" id="2_5audw"]
 [ext_resource type="Texture2D" uid="uid://l4plvy44qm8k" path="res://Assets/Sprite/tile_0153.png" id="2_8y0p3"]
 [ext_resource type="Texture2D" uid="uid://baiy7ulnvqkx7" path="res://Assets/Sprite/tile_0151.png" id="3_2e87b"]
+[ext_resource type="Texture2D" uid="uid://bcvybk4wa4kby" path="res://Assets/Sprite/tile_0098.png" id="3_7jaj3"]
+[ext_resource type="Texture2D" uid="uid://dfi88ceod4rmj" path="res://Assets/Sprite/tile_0156.png" id="4_a1rge"]
 [ext_resource type="Texture2D" uid="uid://dkao1jiw8h34j" path="res://Assets/Sprite/tile_0152.png" id="4_xlui7"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_osdm7"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_5audw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_7jaj3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_a1rge")
+}],
+"loop": false,
+"name": &"Death",
+"speed": 7.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": ExtResource("2_8y0p3")
@@ -57,8 +74,10 @@ polygon = PackedVector2Array(-4, -4, 4, -4, 4, 4, -4, 4)
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 z_index = 1
 sprite_frames = SubResource("SpriteFrames_osdm7")
-animation = &"Idle"
+animation = &"Death"
 autoplay = "Idle"
+frame = 2
+frame_progress = 1.0
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
 navigation_polygon = SubResource("NavigationPolygon_f1aeb")
@@ -84,10 +103,6 @@ collision_mask = 2
 position = Vector2(0, -7.5)
 shape = SubResource("RectangleShape2D_75a0s")
 
-[node name="Timer" type="Timer" parent="."]
-wait_time = 0.1
-autostart = true
-
 [node name="FloorcheckLeft" type="Area2D" parent="."]
 collision_layer = 0
 
@@ -102,11 +117,15 @@ collision_layer = 0
 position = Vector2(8, 5)
 shape = SubResource("RectangleShape2D_uxu1x")
 
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.1
+autostart = true
+
 [connection signal="body_entered" from="HitBox" to="." method="_on_hit_box_body_entered"]
 [connection signal="body_entered" from="PlayerObserver" to="." method="_on_player_observer_body_entered"]
 [connection signal="body_exited" from="PlayerObserver" to="." method="_on_player_observer_body_exited"]
-[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
 [connection signal="body_entered" from="FloorcheckLeft" to="." method="_on_floorcheck_left_body_entered"]
 [connection signal="body_exited" from="FloorcheckLeft" to="." method="_on_floorcheck_left_body_exited"]
 [connection signal="body_entered" from="FloorcheckRight" to="." method="_on_floorcheck_right_body_entered"]
 [connection signal="body_exited" from="FloorcheckRight" to="." method="_on_floorcheck_right_body_exited"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
