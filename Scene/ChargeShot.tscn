@@ -16,7 +16,6 @@ animations = [{
 
 [node name="ChargeShot" type="RigidBody2D"]
 collision_layer = 0
-collision_mask = 61
 gravity_scale = 0.0
 script = ExtResource("1_267bq")
 
@@ -57,4 +56,8 @@ linear_accel_max = 5.0
 tangential_accel_max = 0.5
 color = Color(0.670588, 0.905882, 0.984314, 1)
 
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+scale = Vector2(2.5, 2.5)
+
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

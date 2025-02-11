@@ -1,0 +1,105 @@
+[gd_scene load_steps=10 format=3 uid="uid://bq3mt0t7bq80q"]
+
+[ext_resource type="Script" path="res://Script/EnemyFlying.gd" id="1_1gpio"]
+[ext_resource type="Texture2D" uid="uid://bc18sinvgoa8e" path="res://Assets/Sprite/tile_0099.png" id="2_lq87c"]
+[ext_resource type="Texture2D" uid="uid://bcvybk4wa4kby" path="res://Assets/Sprite/tile_0098.png" id="3_1rcj1"]
+[ext_resource type="Texture2D" uid="uid://dfi88ceod4rmj" path="res://Assets/Sprite/tile_0156.png" id="4_k1cn3"]
+[ext_resource type="Texture2D" uid="uid://dc2deiqcayymk" path="res://Assets/Sprite/tile_0112.png" id="5_qnpim"]
+[ext_resource type="Texture2D" uid="uid://d4d5citpmdxoh" path="res://Assets/Sprite/tile_0113.png" id="6_xi3f8"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_osdm7"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_lq87c")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_1rcj1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_k1cn3")
+}],
+"loop": false,
+"name": &"Death",
+"speed": 7.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_qnpim")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_xi3f8")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 11.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_qnpim")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_xi3f8")
+}],
+"loop": true,
+"name": &"Walking",
+"speed": 11.0
+}]
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_f1aeb"]
+vertices = PackedVector2Array(127, 47, -127, 47, -127, -49, 127, -49)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-137, -59, 137, -59, 137, 57, -137, 57)])
+source_geometry_group_name = &"navigation_polygon_source_group"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_75a0s"]
+size = Vector2(254, 96)
+
+[node name="EnemyFlying" type="CharacterBody2D"]
+z_index = -1
+collision_layer = 4
+script = ExtResource("1_1gpio")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(-4, -4, 4, -4, 4, 4, -4, 4)
+
+[node name="Node2D" type="Node2D" parent="."]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+z_index = 1
+sprite_frames = SubResource("SpriteFrames_osdm7")
+animation = &"Idle"
+autoplay = "Idle"
+
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
+navigation_polygon = SubResource("NavigationPolygon_f1aeb")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+debug_use_custom = true
+debug_path_custom_color = Color(0.890196, 0.00392157, 0.00392157, 1)
+debug_path_custom_point_size = 1.25
+
+[node name="HitBox" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionPolygon2D" parent="HitBox"]
+position = Vector2(0, -1)
+polygon = PackedVector2Array(4, -3, 4, 5, -4, 5, -4, -3)
+
+[node name="PlayerObserver" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerObserver"]
+position = Vector2(0, -1)
+shape = SubResource("RectangleShape2D_75a0s")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.1
+autostart = true
+
+[connection signal="body_entered" from="HitBox" to="." method="_on_hit_box_body_entered"]
+[connection signal="body_entered" from="PlayerObserver" to="." method="_on_player_observer_body_entered"]
+[connection signal="body_exited" from="PlayerObserver" to="." method="_on_player_observer_body_exited"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

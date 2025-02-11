@@ -182,5 +182,5 @@ offset_top = 215.0
 offset_right = 29.0
 offset_bottom = 227.0
 scale = Vector2(1.5, 1.5)
-text = "47"
+text = "0"
 label_settings = SubResource("LabelSettings_46vu7")

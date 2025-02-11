@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=3 uid="uid://db7nwp58ijtpo"]
+
+[ext_resource type="PackedScene" uid="uid://dpdfltxp7pv17" path="res://Scene/TileMap.tscn" id="1_bwpdq"]
+[ext_resource type="PackedScene" uid="uid://b3n7due1tslmf" path="res://Scene/MainCharacter.tscn" id="2_dbyk2"]
+[ext_resource type="PackedScene" uid="uid://ck5jhmu5cteyy" path="res://Scene/EnemySimple.tscn" id="3_sjpkr"]
+[ext_resource type="PackedScene" uid="uid://bq3mt0t7bq80q" path="res://Scene/EnemyFlying.tscn" id="4_82n1e"]
+
+[node name="World" type="Node2D"]
+
+[node name="TileMap" parent="." instance=ExtResource("1_bwpdq")]
+layer_0/tile_data = PackedInt32Array(393235, 131072, 0, 458771, 131072, 0, 524307, 131072, 0, 589843, 131072, 0, 655379, 131072, 0, 393238, 131072, 0, 458774, 131072, 0, 524310, 131072, 0, 589846, 131072, 0, 655382, 131072, 0)
+
+[node name="MainCharacter" parent="." instance=ExtResource("2_dbyk2")]
+z_index = 1
+
+[node name="EnemySimple" type="Node" parent="."]
+
+[node name="EnemySimple" parent="EnemySimple" node_paths=PackedStringArray("Player") instance=ExtResource("3_sjpkr")]
+Player = NodePath("../../MainCharacter")
+
+[node name="FlyingEnemy" type="Node" parent="."]
+
+[node name="EnemyFlying" parent="FlyingEnemy" node_paths=PackedStringArray("Player") instance=ExtResource("4_82n1e")]
+Player = NodePath("../../MainCharacter")

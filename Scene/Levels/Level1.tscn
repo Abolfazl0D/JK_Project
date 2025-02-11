@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=3 uid="uid://dlfe44luekiht"]
+
+[ext_resource type="PackedScene" uid="uid://dpdfltxp7pv17" path="res://Scene/TileMap.tscn" id="1_jt67k"]
+[ext_resource type="PackedScene" uid="uid://b3n7due1tslmf" path="res://Scene/MainCharacter.tscn" id="2_mafvb"]
+[ext_resource type="PackedScene" uid="uid://ck5jhmu5cteyy" path="res://Scene/EnemySimple.tscn" id="3_ldjgd"]
+[ext_resource type="PackedScene" uid="uid://bq3mt0t7bq80q" path="res://Scene/EnemyFlying.tscn" id="4_i7nbq"]
+
+[node name="World" type="Node2D"]
+
+[node name="TileMap" parent="." instance=ExtResource("1_jt67k")]
+layer_0/tile_data = PackedInt32Array(393235, 131072, 0, 458771, 131072, 0, 524307, 131072, 0, 589843, 131072, 0, 655379, 131072, 0, 720915, 131072, 0)
+
+[node name="MainCharacter" parent="." instance=ExtResource("2_mafvb")]
+z_index = 1
+
+[node name="EnemySimple" type="Node" parent="."]
+
+[node name="EnemySimple" parent="EnemySimple" node_paths=PackedStringArray("Player") instance=ExtResource("3_ldjgd")]
+Player = NodePath("../../MainCharacter")
+
+[node name="FlyingEnemy" type="Node" parent="."]
+
+[node name="EnemyFlying" parent="FlyingEnemy" node_paths=PackedStringArray("Player") instance=ExtResource("4_i7nbq")]
+Player = NodePath("../../MainCharacter")

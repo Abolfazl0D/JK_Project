@@ -74,10 +74,8 @@ polygon = PackedVector2Array(-4, -4, 4, -4, 4, 4, -4, 4)
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 z_index = 1
 sprite_frames = SubResource("SpriteFrames_osdm7")
-animation = &"Death"
+animation = &"Walking"
 autoplay = "Idle"
-frame = 2
-frame_progress = 1.0
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
 navigation_polygon = SubResource("NavigationPolygon_f1aeb")
