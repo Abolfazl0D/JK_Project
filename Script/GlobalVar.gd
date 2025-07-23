@@ -10,3 +10,5 @@ var Coin = 0
 var Pureness = 100
 
 var Bullet = 50
+
+var Level = 1

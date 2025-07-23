@@ -1,0 +1,78 @@
+[gd_scene load_steps=9 format=3 uid="uid://bs6ta6bmx2a6s"]
+
+[ext_resource type="Script" path="res://Script/RefillBullet.gd" id="1_13e5o"]
+[ext_resource type="Texture2D" uid="uid://d0yogbk0eiphd" path="res://Assets/Sprite/tile_0158.png" id="2_sbvev"]
+[ext_resource type="Texture2D" uid="uid://bcvybk4wa4kby" path="res://Assets/Sprite/tile_0098.png" id="3_ojf42"]
+[ext_resource type="FontFile" uid="uid://1k6yp06j52k6" path="res://Assets/Font/Arapix.otf" id="4_orj20"]
+[ext_resource type="Texture2D" uid="uid://c28s88jlod1aw" path="res://Assets/Sprite/tile_0164.png" id="5_6axh2"]
+[ext_resource type="Texture2D" uid="uid://gg6nx86u74nh" path="res://Assets/Sprite/tile_0088.png" id="6_8knwj"]
+[ext_resource type="Texture2D" uid="uid://n4vbsy5ao35k" path="res://Assets/Sprite/tilemap_packedB.png" id="7_4cxx6"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uhev4"]
+size = Vector2(26, 19)
+
+[node name="RefillBullet" type="Node2D"]
+script = ExtResource("1_13e5o")
+
+[node name="OpenedChest" type="Sprite2D" parent="."]
+visible = false
+texture = ExtResource("2_sbvev")
+
+[node name="ClosedChest" type="Sprite2D" parent="."]
+texture = ExtResource("5_6axh2")
+
+[node name="Coin" type="Sprite2D" parent="."]
+position = Vector2(-14, 1)
+texture = ExtResource("6_8knwj")
+
+[node name="Label" type="Label" parent="Coin"]
+offset_left = 3.0
+offset_top = -5.0
+offset_right = 12.0
+offset_bottom = 7.0
+scale = Vector2(0.721827, 0.721827)
+theme_override_fonts/font = ExtResource("4_orj20")
+theme_override_font_sizes/font_size = 12
+text = "50"
+metadata/_edit_use_anchors_ = true
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, -3.5)
+shape = SubResource("RectangleShape2D_uhev4")
+
+[node name="Bullet" type="Sprite2D" parent="."]
+position = Vector2(-2.26498e-06, -7)
+scale = Vector2(0.487177, 0.487177)
+texture = ExtResource("3_ojf42")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Label" type="Label" parent="CanvasLayer"]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -85.0
+offset_top = -32.0
+offset_right = 171.0
+offset_bottom = -7.99998
+grow_horizontal = 2
+grow_vertical = 0
+scale = Vector2(0.721827, 0.721827)
+theme_override_fonts/font = ExtResource("4_orj20")
+theme_override_font_sizes/font_size = 24
+text = "برای پر کردن تیر ها      را فشار دهید "
+
+[node name="B" type="Sprite2D" parent="CanvasLayer/Label"]
+position = Vector2(106.674, 12.4684)
+scale = Vector2(1.38537, 1.38537)
+texture = ExtResource("7_4cxx6")
+region_enabled = true
+region_rect = Rect2(369, 193, 13, 14)
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]

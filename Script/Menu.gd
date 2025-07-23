@@ -1,11 +1,26 @@
 extends Node2D
 
+var Path = "user://DATA.dat"
 
-# Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	load_Level()
+
+func load_Level():
+	var file = FileAccess.open(Path, FileAccess.READ)
+	if file == null:
+		get_node("/root/GlobalVar").Level = 1
+	elif file:
+		get_node("/root/GlobalVar").Level = file.get_var()
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
+func _on_exit_pressed():
+	get_tree().quit()
+
+
+func _on_tips_pressed():
+	get_tree().change_scene_to_file("res://Scene/Tips.tscn")
+
+
+func _on_start_pressed():
+	var Level = str(get_node("/root/GlobalVar").Level)
+	get_tree().change_scene_to_file("res://Scene/Levels/Level"+Level+".tscn")

@@ -1,13 +1,14 @@
 extends CharacterBody2D
 
 var Speed = 75
-var Jump = -170
+var Jump = -175
 var Gravity = 3
 var Jump_permission = true
 var Protoction = false
 var Shoot_Delay = false
 var Falling = false
 var Shooting = false
+var Spring_Jump = false
 var Bullet_scene = preload("res://Scene/Bullet.tscn")
 var Charge_bullet_scene = preload("res://Scene/ChargeShot.tscn")
 
@@ -17,9 +18,21 @@ func _physics_process(delta):
 	Player_Abilities()
 
 
+	if $"/root/GlobalVar".HP <= 0:
+		$AnimatedSprite2D.animation = "Death"
+		velocity = Vector2(0,0)
+		await get_tree().create_timer(3).timeout
+		move_and_slide()
+		if get_tree():
+			$"/root/GlobalVar".HP = 10
+			$"/root/GlobalVar".Pureness = 100
+			get_tree().reload_current_scene()
+
+
 	if is_on_floor():
 		velocity.y = 0
 		Jump_permission = true
+		Spring_Jump = false
 		Falling = false
 
 	if Input.is_action_pressed("MoveLeft"):
@@ -34,10 +47,9 @@ func _physics_process(delta):
 	if Input.is_action_just_pressed("Jump") and Jump_permission:
 		velocity.y = Jump
 	
-	if Input.is_action_just_released("Jump") and !is_on_floor() and velocity.y < -30:
+	if Input.is_action_just_released("Jump") and !is_on_floor() and velocity.y < -30 and !Spring_Jump:
 		velocity.y = -15
-	
-		
+
 	if Shooting:
 		$AnimatedSprite2D.animation = "Shooting"
 	
@@ -56,8 +68,9 @@ func _physics_process(delta):
 		$AnimatedSprite2D.flip_h = false
 	
 	if velocity.y >= 0 and !is_on_floor() and !Falling:
-		Falling = true
-		Jump_Delay()
+		if get_tree():
+			Falling = true
+			Jump_Delay()
 	elif !is_on_floor() and !Falling:
 		Jump_permission = false
 
@@ -82,12 +95,12 @@ func Player_Abilities():
 	$"/root/GlobalVar".Pureness
 
 	
-	if Input.is_action_just_pressed("Heal") and $"/root/GlobalVar".HP < 10 and $"/root/GlobalVar".Pureness >= 35:
+	if Input.is_action_just_pressed("Heal") and $"/root/GlobalVar".HP < 10 and $"/root/GlobalVar".Pureness >= 35 and !$"/root/GlobalVar".HP <= 0:
 		$HealParticles.emitting = true
 		$"/root/GlobalVar".Pureness -= 35
 		$"/root/GlobalVar".HP += 2
 	
-	if Input.is_action_just_pressed("Shoot") and $"/root/GlobalVar".Bullet >= 1 and !Shooting:
+	if Input.is_action_just_pressed("Shoot") and !Shooting and !$"/root/GlobalVar".HP <= 0 and get_node("/root/GlobalVar").Bullet > 0:
 		Shooting = true
 		$AnimatedSprite2D.animation = "Shooting"
 		if $AnimatedSprite2D.flip_h == true:
@@ -106,7 +119,7 @@ func Player_Abilities():
 			$"/root/GlobalVar".Bullet -= 1
 		await get_tree().create_timer(0.15).timeout
 		Shooting = false
-	if Input.is_action_just_pressed("ChargeShot") and $"/root/GlobalVar".Pureness >= 25 and !Shooting:
+	if Input.is_action_just_pressed("ChargeShot") and $"/root/GlobalVar".Pureness >= 25 and !Shooting and !$"/root/GlobalVar".HP <= 0:
 		if !$AnimatedSprite2D.flip_h:
 			velocity.x = -80
 			move_and_slide()
@@ -144,6 +157,25 @@ func Hurt():
 	set_modulate(Color(1,1,1,1))
 
 func Jump_Delay():
+
 	await get_tree().create_timer(0.1).timeout
 	if !is_on_floor():
 		Jump_permission = false
+
+func Spring_Pushed():
+	Spring_Jump = true
+	velocity.y = -300
+	move_and_slide()
+
+func Die():
+	set_collision_layer_value(1,false)
+	$CollisionPolygon2D.disabled = true
+	$"/root/GlobalVar".HP = 0
+	$AnimatedSprite2D.animation = "Death"
+	await get_tree().create_timer(3).timeout
+	move_and_slide()
+	if get_tree():
+		$"/root/GlobalVar".HP = 10
+		$"/root/GlobalVar".Pureness = 100
+		get_tree().reload_current_scene()
+		

@@ -1,0 +1,136 @@
+[gd_scene load_steps=9 format=3 uid="uid://drqq4j30o0u8j"]
+
+[ext_resource type="Texture2D" uid="uid://byxs2glxfc2f" path="res://Assets/Sprite/red.png" id="1_5dyv0"]
+[ext_resource type="Script" path="res://Script/Pause.gd" id="1_f6kfd"]
+[ext_resource type="Texture2D" uid="uid://cv8x4wenicivs" path="res://Assets/Sprite/red_pressed.png" id="2_hosm8"]
+[ext_resource type="Texture2D" uid="uid://mal14ekbjqga" path="res://Assets/Sprite/green.png" id="5_br8h1"]
+[ext_resource type="Texture2D" uid="uid://dqehiekjxul7l" path="res://Assets/Sprite/green_pressed.png" id="6_14tea"]
+[ext_resource type="PackedScene" uid="uid://bwmtqm5mv0dnx" path="res://Scene/Tips.tscn" id="7_8mbj4"]
+[ext_resource type="FontFile" uid="uid://1k6yp06j52k6" path="res://Assets/Font/Arapix.otf" id="7_ke0er"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_c4jka"]
+font = ExtResource("7_ke0er")
+font_size = 24
+
+[node name="Pause" type="Node2D"]
+process_mode = 3
+script = ExtResource("1_f6kfd")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+offset_right = 480.0
+offset_bottom = 240.0
+size_flags_horizontal = 4
+color = Color(0, 0, 0, 0.529412)
+metadata/_edit_lock_ = true
+
+[node name="Exit" type="TextureButton" parent="CanvasLayer/ColorRect"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -31.0
+offset_top = -105.0
+offset_right = 17.0
+offset_bottom = -57.0
+grow_horizontal = 2
+grow_vertical = 0
+scale = Vector2(1.33353, 0.514779)
+texture_normal = ExtResource("1_5dyv0")
+texture_pressed = ExtResource("2_hosm8")
+
+[node name="Resume" type="TextureButton" parent="CanvasLayer/ColorRect"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -30.9999
+offset_top = 95.0
+offset_right = 17.0001
+offset_bottom = 143.0
+grow_horizontal = 2
+scale = Vector2(1.36, 0.56)
+texture_normal = ExtResource("5_br8h1")
+texture_pressed = ExtResource("6_14tea")
+
+[node name="ExitLabel" type="Label" parent="CanvasLayer/ColorRect"]
+layout_mode = 0
+offset_left = 226.0
+offset_top = 132.0
+offset_right = 260.0
+offset_bottom = 156.0
+text = "خروج"
+label_settings = SubResource("LabelSettings_c4jka")
+
+[node name="ResumeLabel" type="Label" parent="CanvasLayer/ColorRect"]
+layout_mode = 0
+offset_left = 226.0
+offset_top = 94.0
+offset_right = 260.0
+offset_bottom = 118.0
+text = "ادامه
+"
+label_settings = SubResource("LabelSettings_c4jka")
+
+[node name="Tips" parent="CanvasLayer" instance=ExtResource("7_8mbj4")]
+
+[node name="MovetoRight" parent="CanvasLayer/Tips/Buttons" index="0"]
+offset_left = 375.526
+offset_right = 440.526
+
+[node name="Buttons" parent="CanvasLayer/Tips/Buttons" index="1"]
+offset_left = 423.526
+offset_right = 454.526
+
+[node name="MovetoLeft" parent="CanvasLayer/Tips/Buttons" index="2"]
+offset_left = 380.526
+offset_right = 440.526
+
+[node name="Jump" parent="CanvasLayer/Tips/Buttons" index="3"]
+offset_left = 420.526
+offset_right = 439.526
+
+[node name="RecoverHP" parent="CanvasLayer/Tips/Buttons" index="4"]
+offset_left = 388.526
+offset_right = 440.526
+
+[node name="Shoot SimpleBullet" parent="CanvasLayer/Tips/Buttons" index="5"]
+offset_left = 367.526
+offset_right = 423.526
+
+[node name="Shoot ChargedBullet" parent="CanvasLayer/Tips/Buttons" index="6"]
+offset_left = 349.526
+offset_right = 408.526
+
+[node name="PurenessBar" parent="CanvasLayer/Tips/HUD" index="0"]
+offset_left = 6.54857
+offset_right = 32.5486
+
+[node name="Bullet" parent="CanvasLayer/Tips/HUD" index="1"]
+offset_left = 6.54857
+offset_right = 22.5486
+
+[node name="Bullet2" parent="CanvasLayer/Tips/HUD" index="2"]
+offset_left = 6.54857
+offset_right = 22.5486
+
+[node name="Label" parent="CanvasLayer/Tips/HUD/Bullet2" index="1"]
+offset_top = 16.0
+offset_right = 163.0
+offset_bottom = 43.0
+
+[node name="Button" parent="CanvasLayer/Tips" index="2"]
+visible = false
+offset_left = 486.0
+offset_top = 246.0
+offset_right = 534.0
+offset_bottom = 294.0
+
+[connection signal="pressed" from="CanvasLayer/ColorRect/Exit" to="." method="_on_exit_pressed"]
+[connection signal="pressed" from="CanvasLayer/ColorRect/Resume" to="." method="_on_resume_pressed"]
+
+[editable path="CanvasLayer/Tips"]

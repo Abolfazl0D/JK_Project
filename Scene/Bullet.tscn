@@ -24,6 +24,7 @@ animations = [{
 }]
 
 [node name="Bullet" type="RigidBody2D"]
+z_index = -2
 collision_layer = 0
 gravity_scale = 0.0
 script = ExtResource("1_3luyh")

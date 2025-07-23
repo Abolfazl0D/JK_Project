@@ -38,8 +38,9 @@ func _physics_process(delta):
 
 func _on_hit_box_body_entered(body):
 	if body.name == "MainCharacter" and !body.Protoction:
-		get_node("/root/GlobalVar").HP -= Damage
-		body.Hurt()
+		if $"/root/GlobalVar".HP > 0:
+			get_node("/root/GlobalVar").HP -= Damage
+			body.Hurt()
 
 	if body.name == "Bullet":
 		HP -= 1

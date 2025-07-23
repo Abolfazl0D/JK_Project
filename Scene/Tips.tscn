@@ -1,0 +1,229 @@
+[gd_scene load_steps=9 format=3 uid="uid://bwmtqm5mv0dnx"]
+
+[ext_resource type="FontFile" uid="uid://1k6yp06j52k6" path="res://Assets/Font/Arapix.otf" id="1_cvyai"]
+[ext_resource type="Script" path="res://Script/Tips.gd" id="1_w4fwp"]
+[ext_resource type="Texture2D" uid="uid://n4vbsy5ao35k" path="res://Assets/Sprite/tilemap_packedB.png" id="2_1w3s3"]
+[ext_resource type="Texture2D" uid="uid://cie455r3jvjlk" path="res://Assets/Sprite/PurenessBar_100%.png" id="4_di5ah"]
+[ext_resource type="Texture2D" uid="uid://bcvybk4wa4kby" path="res://Assets/Sprite/tile_0098.png" id="5_tpf1u"]
+[ext_resource type="Texture2D" uid="uid://gg6nx86u74nh" path="res://Assets/Sprite/tile_0088.png" id="6_r8xjj"]
+[ext_resource type="Texture2D" uid="uid://b7brgvp6bx54p" path="res://Assets/Sprite/blue.png" id="7_2uxex"]
+[ext_resource type="Texture2D" uid="uid://b62c5oso14prw" path="res://Assets/Sprite/blue_pressed.png" id="8_om6qb"]
+
+[node name="Tips" type="Node2D"]
+script = ExtResource("1_w4fwp")
+
+[node name="Buttons" type="Node2D" parent="."]
+position = Vector2(-240, 0)
+scale = Vector2(1.52, 1.52)
+
+[node name="MovetoRight" type="Label" parent="Buttons"]
+offset_left = 365.0
+offset_top = 32.0
+offset_right = 430.0
+offset_bottom = 44.0
+theme_override_fonts/font = ExtResource("1_cvyai")
+theme_override_font_sizes/font_size = 12
+text = "حرکت به سمت راست"
+
+[node name="D" type="Sprite2D" parent="Buttons/MovetoRight"]
+position = Vector2(76, 7)
+texture = ExtResource("2_1w3s3")
+region_enabled = true
+region_rect = Rect2(321, 177, 13, 14)
+
+[node name="Buttons" type="Label" parent="Buttons"]
+offset_left = 413.0
+offset_top = 8.0
+offset_right = 444.0
+offset_bottom = 20.0
+scale = Vector2(1.48, 1.48)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("1_cvyai")
+theme_override_font_sizes/font_size = 12
+text = "کنترل ها"
+
+[node name="MovetoLeft" type="Label" parent="Buttons"]
+offset_left = 370.0
+offset_top = 48.0
+offset_right = 430.0
+offset_bottom = 60.0
+theme_override_fonts/font = ExtResource("1_cvyai")
+theme_override_font_sizes/font_size = 12
+text = "حرکت به سمت چپ"
+
+[node name="A" type="Sprite2D" parent="Buttons/MovetoLeft"]
+position = Vector2(71, 7)
+texture = ExtResource("2_1w3s3")
+region_enabled = true
+region_rect = Rect2(289, 177, 13, 14)
+
+[node name="Jump" type="Label" parent="Buttons"]
+offset_left = 410.0
+offset_top = 64.0
+offset_right = 429.0
+offset_bottom = 76.0
+theme_override_fonts/font = ExtResource("1_cvyai")
+theme_override_font_sizes/font_size = 12
+text = "پرش "
+
+[node name="W" type="Sprite2D" parent="Buttons/Jump"]
+position = Vector2(31, 7)
+texture = ExtResource("2_1w3s3")
+region_enabled = true
+region_rect = Rect2(289, 161, 13, 14)
+
+[node name="RecoverHP" type="Label" parent="Buttons"]
+offset_left = 378.0
+offset_top = 113.0
+offset_right = 430.0
+offset_bottom = 125.0
+theme_override_fonts/font = ExtResource("1_cvyai")
+theme_override_font_sizes/font_size = 12
+text = "پر کردن سلامتی"
+
+[node name="R" type="Sprite2D" parent="Buttons/RecoverHP"]
+position = Vector2(63, 7)
+texture = ExtResource("2_1w3s3")
+region_enabled = true
+region_rect = Rect2(321, 161, 13, 14)
+
+[node name="Shoot SimpleBullet" type="Label" parent="Buttons"]
+offset_left = 357.0
+offset_top = 97.0
+offset_right = 413.0
+offset_bottom = 109.0
+theme_override_fonts/font = ExtResource("1_cvyai")
+theme_override_font_sizes/font_size = 12
+text = "پرتاب گلوله ساده"
+
+[node name="S" type="Sprite2D" parent="Buttons/Shoot SimpleBullet"]
+position = Vector2(84, 7)
+texture = ExtResource("2_1w3s3")
+region_enabled = true
+region_rect = Rect2(305, 177, 13, 14)
+
+[node name="LeftClick" type="Sprite2D" parent="Buttons/Shoot SimpleBullet"]
+position = Vector2(68, 7)
+texture = ExtResource("2_1w3s3")
+region_enabled = true
+region_rect = Rect2(146, 32, 12, 16)
+
+[node name="Shoot ChargedBullet" type="Label" parent="Buttons"]
+offset_left = 339.0
+offset_top = 80.0
+offset_right = 398.0
+offset_bottom = 92.0
+theme_override_fonts/font = ExtResource("1_cvyai")
+theme_override_font_sizes/font_size = 12
+text = " شلیک گلوله ویژه"
+
+[node name="Space" type="Sprite2D" parent="Buttons/Shoot ChargedBullet"]
+position = Vector2(86, 7)
+texture = ExtResource("2_1w3s3")
+region_enabled = true
+region_rect = Rect2(497, 225, 46, 14)
+
+[node name="HUD" type="Node2D" parent="."]
+scale = Vector2(1.4, 1.4)
+
+[node name="PurenessBar" type="Label" parent="HUD"]
+offset_left = 35.12
+offset_top = 11.0057
+offset_right = 61.12
+offset_bottom = 23.0057
+theme_override_fonts/font = ExtResource("1_cvyai")
+theme_override_font_sizes/font_size = 12
+text = "بار قدرت"
+
+[node name="PurenessBar" type="Sprite2D" parent="HUD/PurenessBar"]
+position = Vector2(64.9474, 7)
+texture = ExtResource("4_di5ah")
+region_rect = Rect2(497, 225, 46, 14)
+
+[node name="Label" type="Label" parent="HUD/PurenessBar"]
+layout_mode = 0
+offset_top = 15.7895
+offset_right = 161.0
+offset_bottom = 57.7895
+scale = Vector2(0.772241, 0.772241)
+theme_override_fonts/font = ExtResource("1_cvyai")
+theme_override_font_sizes/font_size = 12
+text = "بار قدرت با از بین بردن دشمنان آلوده پر می شود
+برای پر کردن سلامتی و شلیک گلوله ویژه
+ استفاده میشود"
+
+[node name="Bullet" type="Label" parent="HUD"]
+offset_left = 35.12
+offset_top = 68.7086
+offset_right = 51.12
+offset_bottom = 80.7086
+theme_override_fonts/font = ExtResource("1_cvyai")
+theme_override_font_sizes/font_size = 12
+text = "گلوله"
+
+[node name="Bullet" type="Sprite2D" parent="HUD/Bullet"]
+position = Vector2(44.5527, 5.68422)
+scale = Vector2(1.74959, 1.74959)
+texture = ExtResource("5_tpf1u")
+region_rect = Rect2(497, 225, 46, 14)
+
+[node name="Label" type="Label" parent="HUD/Bullet"]
+layout_mode = 0
+offset_top = 15.7895
+offset_right = 161.0
+offset_bottom = 57.7895
+scale = Vector2(0.772241, 0.772241)
+theme_override_fonts/font = ExtResource("1_cvyai")
+theme_override_font_sizes/font_size = 12
+text = "تعداد گلوله های ساده پرتاب شدنی را نشان میدهد
+نهایت تعدادی که میتوان آن را ذخیره کرد
+50 عدد است"
+
+[node name="Bullet2" type="Label" parent="HUD"]
+offset_left = 35.12
+offset_top = 120.137
+offset_right = 51.12
+offset_bottom = 132.137
+theme_override_fonts/font = ExtResource("1_cvyai")
+theme_override_font_sizes/font_size = 12
+text = "سکه"
+
+[node name="Bullet" type="Sprite2D" parent="HUD/Bullet2"]
+position = Vector2(44.5527, 5.68422)
+scale = Vector2(1.74959, 1.74959)
+texture = ExtResource("6_r8xjj")
+region_rect = Rect2(497, 225, 46, 14)
+
+[node name="Label" type="Label" parent="HUD/Bullet2"]
+layout_mode = 0
+offset_top = 15.7895
+offset_right = 161.0
+offset_bottom = 57.7895
+scale = Vector2(0.772241, 0.772241)
+theme_override_fonts/font = ExtResource("1_cvyai")
+theme_override_font_sizes/font_size = 12
+text = "تعداد سکه های جمع آوری شده را نشان می دهد 
+می توان با آن گلوله های ساده خرید"
+
+[node name="Button" type="TextureButton" parent="."]
+offset_left = 443.0
+offset_top = 220.0
+offset_right = 491.0
+offset_bottom = 268.0
+scale = Vector2(0.605531, 0.24553)
+texture_normal = ExtResource("7_2uxex")
+texture_pressed = ExtResource("8_om6qb")
+
+[node name="Label" type="Label" parent="Button"]
+layout_mode = 0
+offset_left = 6.60578
+offset_top = 4.07282
+offset_right = 29.6058
+offset_bottom = 16.0728
+scale = Vector2(1.6222, 2.97506)
+theme_override_fonts/font = ExtResource("1_cvyai")
+theme_override_font_sizes/font_size = 12
+text = "بازگشت"
+metadata/_edit_lock_ = true
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

@@ -11,6 +11,7 @@ config_version=5
 [application]
 
 config/name="JK_Project"
+run/main_scene="res://Scene/Menu.tscn"
 config/features=PackedStringArray("4.2", "GL Compatibility")
 config/icon="res://icon.svg"
 
@@ -29,6 +30,7 @@ window/size/viewport_height=240
 window/size/mode=2
 window/stretch/mode="canvas_items"
 window/stretch/aspect="ignore"
+mouse_cursor/custom_image="res://Assets/Sprite/mous.png"
 
 [input]
 
@@ -63,6 +65,16 @@ ChargeShot={
 "events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":32,"key_label":0,"unicode":32,"echo":false,"script":null)
 ]
 }
+Pause={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":4194305,"key_label":0,"unicode":0,"echo":false,"script":null)
+]
+}
+RefillBullet={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":66,"key_label":0,"unicode":98,"echo":false,"script":null)
+]
+}
 
 [layer_names]
 
@@ -73,10 +85,11 @@ ChargeShot={
 2d_physics/layer_5="Enemy_3"
 2d_physics/layer_6="Enemy_4"
 2d_physics/layer_7="Bullet"
+2d_physics/layer_8="Spring"
 
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
-environment/defaults/default_clear_color=Color(0.0627451, 0, 0.223529, 1)
+environment/defaults/default_clear_color=Color(0.101961, 0.117647, 0.231373, 1)

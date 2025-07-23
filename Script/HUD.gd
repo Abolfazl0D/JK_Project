@@ -6,15 +6,19 @@ extends Node2D
 @onready var Heart = $CanvasLayer/Heart
 @onready var Bullet = get_node("/root/GlobalVar").Bullet
 @onready var Bullet_count = $CanvasLayer/Label
+@onready var Coin = get_node("/root/GlobalVar").Coin
+@onready var Coin_count = $CanvasLayer/Label2
 
 
 func _process(delta):
 	HP = get_node("/root/GlobalVar").HP
 	Pureness = get_node("/root/GlobalVar").Pureness
 	Bullet = get_node("/root/GlobalVar").Bullet
+	Coin = get_node("/root/GlobalVar").Coin
 	PurenessBarRefresh()
 	HPBarRefresh()
 	BulletRefresh()
+	CoinRefresh()
 
 func PurenessBarRefresh():
 	if 5 > Pureness or Pureness == 0:
@@ -100,3 +104,7 @@ func HPBarRefresh():
 func BulletRefresh():
 	var Bullet_str = str(Bullet)
 	$CanvasLayer/Label.text = Bullet_str
+
+func CoinRefresh():
+	var Coin_str = str(Coin)
+	$CanvasLayer/Label2.text = Coin_str

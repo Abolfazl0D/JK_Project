@@ -1,0 +1,39 @@
+[gd_scene load_steps=6 format=3 uid="uid://bqd45sirwrkg4"]
+
+[ext_resource type="Script" path="res://Script/Water.gd" id="1_48j4t"]
+[ext_resource type="Texture2D" uid="uid://b58hu6r3y63jo" path="res://Assets/Sprite/tile_0159.png" id="2_qnpr5"]
+[ext_resource type="Texture2D" uid="uid://bje5a3mwsfmq3" path="res://Assets/Sprite/tile_0160.png" id="3_bdyor"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tgtdc"]
+size = Vector2(8, 7)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_32wj0"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_qnpr5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_bdyor")
+}],
+"loop": true,
+"name": &"Default",
+"speed": 6.0
+}]
+
+[node name="Water" type="Area2D"]
+z_index = -3
+collision_mask = 66
+script = ExtResource("1_48j4t")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 0.5)
+shape = SubResource("RectangleShape2D_tgtdc")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_32wj0")
+animation = &"Default"
+autoplay = "Default"
+frame_progress = 0.214711
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
